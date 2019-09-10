@@ -1,4 +1,4 @@
-package com.ort.atqr.Services;
+package com.ort.atqr.Service;
 
 public class ProfessorService {
 }

@@ -1,4 +1,4 @@
-package com.ort.atqr.Models;
+package com.ort.atqr.Model;
 
 import java.util.Date;
 
@@ -21,8 +21,6 @@ public abstract class User {
         this.imageUrl = imageUrl;
         this.password = password;
     }
-
-    public User() { }
 
     public String getFirstName() {
         return firstName;
