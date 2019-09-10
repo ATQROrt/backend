@@ -1,4 +1,4 @@
-package com.ort.atqr.Controllers;
+package com.ort.atqr.Controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
