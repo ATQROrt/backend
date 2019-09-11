@@ -1,9 +1,6 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -13,6 +10,7 @@ public class Assistance {
     private Long id;
     private AssistanceStatus status;
     private Date date;
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private Student student;
 
 }
