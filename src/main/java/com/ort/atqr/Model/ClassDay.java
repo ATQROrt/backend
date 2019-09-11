@@ -1,11 +1,16 @@
 package com.ort.atqr.Model;
 
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
+@Entity
 public class ClassDay {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private List<Student> studentList;
+    @OneToMany(targetEntity=Student.class, fetch= FetchType.EAGER)
+    private Set<Student> studentList;
     private Date date;
     private Boolean cancelled;
 
