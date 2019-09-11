@@ -6,6 +6,8 @@ public class Course {
 
     private String code;
     private Asignature asignature;
-    private List<Student> students;
+    private List<Student> studentsList;
+    private Professor professor;
+    private List<ClassDay> classDayList;
 
 }
