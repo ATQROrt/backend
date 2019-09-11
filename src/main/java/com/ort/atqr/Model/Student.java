@@ -1,9 +1,6 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +9,7 @@ public class Student extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @OneToMany(targetEntity=Asignature.class, fetch= FetchType.EAGER)
     private List<Asignature> asignatures;
 
     public Student(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
