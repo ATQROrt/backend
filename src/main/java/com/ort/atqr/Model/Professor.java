@@ -2,7 +2,7 @@ package com.ort.atqr.Model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Professor extends User{
@@ -11,7 +11,7 @@ public class Professor extends User{
     private Long id;
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Course> courses;
+    private Set<Course> courses;
 
     public Professor(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
         super(firstName, lastName, document, mail, birth, imageUrl, password);
