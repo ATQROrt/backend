@@ -1,8 +1,11 @@
 package com.ort.atqr.Model;
 
-public class Asignature {
-    private Long id;
-    private String name;
-    private String code;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Asignature {
+    @Id
+    private String code;
+    private String name;
 }
