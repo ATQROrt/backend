@@ -9,7 +9,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String code;
-    @Column(name = "ASIGNATURE")
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private Asignature asignature;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Student> studentsList;
