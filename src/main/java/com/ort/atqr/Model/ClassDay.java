@@ -9,7 +9,7 @@ public class ClassDay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Student> studentList;
     private Date date;
     private Boolean cancelled;

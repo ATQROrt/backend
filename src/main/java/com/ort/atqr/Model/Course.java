@@ -10,10 +10,10 @@ public class Course {
     private Long id;
     private String code;
     private Asignature asignature;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Student> studentsList;
     private Professor professor;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ClassDay> classDayList;
 
 }
