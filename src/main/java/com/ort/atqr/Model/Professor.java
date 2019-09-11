@@ -10,7 +10,7 @@ public class Professor extends User{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Course> courses;
 
     public Professor(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
