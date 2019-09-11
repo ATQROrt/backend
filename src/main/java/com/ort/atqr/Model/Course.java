@@ -13,6 +13,7 @@ public class Course {
     private Asignature asignature;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Student> studentsList;
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private Professor professor;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     private List<ClassDay> classDayList;
