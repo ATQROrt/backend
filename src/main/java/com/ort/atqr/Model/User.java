@@ -4,8 +4,6 @@ import javax.persistence.PrePersist;
 import java.util.Date;
 
 public abstract class User {
-
-
     private String firstName;
     private String lastName;
     private Long document;

@@ -11,7 +11,6 @@ public class Assistance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private AssistanceStatus status;
     private Date date;
     private Student student;

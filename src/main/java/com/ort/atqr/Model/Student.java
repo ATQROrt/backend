@@ -9,6 +9,7 @@ public class Student extends User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @OneToMany
     private List<Asignature> asignatures;
 
     public Student(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {

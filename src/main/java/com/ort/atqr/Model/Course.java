@@ -1,9 +1,6 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -13,8 +10,10 @@ public class Course {
     private Long id;
     private String code;
     private Asignature asignature;
+    @OneToMany
     private List<Student> studentsList;
     private Professor professor;
+    @OneToMany
     private List<ClassDay> classDayList;
 
 }
