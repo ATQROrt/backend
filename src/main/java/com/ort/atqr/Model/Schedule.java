@@ -1,4 +1,4 @@
-package com.ort.atqr.Models;
+package com.ort.atqr.Model;
 
 public class Schedule {
 

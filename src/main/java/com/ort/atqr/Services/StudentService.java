@@ -1,6 +1,6 @@
 package com.ort.atqr.Services;
 
-import com.ort.atqr.Models.Student;
+import com.ort.atqr.Model.Student;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -1,7 +1,7 @@
 package com.ort.atqr.Controllers;
 
 
-import com.ort.atqr.Models.Student;
+import com.ort.atqr.Model.Student;
 import com.ort.atqr.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
