@@ -28,7 +28,7 @@ public class StudentController {
         int code = 500;
         Object object = null;
         try{
-            object = studentService.login(student);
+            object = studentService.testLogin(student);
         } catch(NullPointerException e){
             message = "Hay datos que faltan";
             code = 400;

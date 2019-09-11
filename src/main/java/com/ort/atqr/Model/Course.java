@@ -1,7 +1,9 @@
 package com.ort.atqr.Model;
 
+import javax.persistence.Entity;
 import java.util.List;
 
+@Entity
 public class Course {
 
     private String code;

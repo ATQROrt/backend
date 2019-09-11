@@ -9,7 +9,7 @@ import java.util.Date;
 @Service
 public class StudentService {
 
-    public Student login(Student student) throws NullPointerException, UserNotFoundException {
+    public Student testLogin(Student student) throws NullPointerException, UserNotFoundException {
         if(student == null || student.getPassword() == null || student.getDocument() == null || student.getPassword().isEmpty()){
             throw new NullPointerException();
         }
