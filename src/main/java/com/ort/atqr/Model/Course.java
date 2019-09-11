@@ -2,6 +2,7 @@ package com.ort.atqr.Model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Course {
@@ -16,6 +17,6 @@ public class Course {
     @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
     private Professor professor;
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<ClassDay> classDayList;
+    private Set<ClassDay> classDayList;
 
 }
