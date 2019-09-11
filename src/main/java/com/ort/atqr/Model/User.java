@@ -1,16 +1,11 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import java.util.Date;
 
 public abstract class User {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
     private String firstName;
     private String lastName;
     private Long document;
@@ -33,10 +28,6 @@ public abstract class User {
     @PrePersist
     private void createdAt(){
         this.createdAt = new Date();
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public Date getCreatedAt() {
