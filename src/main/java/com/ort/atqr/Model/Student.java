@@ -1,8 +1,11 @@
 package com.ort.atqr.Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Student extends User {
 
     private List<Asignature> asignatures;
