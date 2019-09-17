@@ -2,12 +2,21 @@ package com.ort.atqr.Service;
 
 import com.ort.atqr.Exception.UserNotFoundException;
 import com.ort.atqr.Model.Student;
+import com.ort.atqr.Repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 @Service
 public class StudentService {
+
+    private StudentRepository studentRepository;
+
+    @Autowired
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Student testLogin(Student student) throws NullPointerException, UserNotFoundException {
         if(student == null || student.getPassword() == null || student.getDocument() == null || student.getPassword().isEmpty()){
@@ -24,5 +33,10 @@ public class StudentService {
         }
 
         throw new UserNotFoundException();
+    }
+
+    public void createTest() {
+        Student myStudent = new Student("Juan", "Perez", 36375564L, "juan.perez@atqr.com", new Date(), null, "password");
+        studentRepository.save(myStudent);
     }
 }

@@ -6,9 +6,6 @@ import java.util.Set;
 
 @Entity
 public class Student extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @OneToMany(targetEntity=Asignature.class, fetch= FetchType.EAGER)
     private Set<Asignature> asignatures;
 

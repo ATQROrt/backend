@@ -1,9 +1,13 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.util.Date;
 
+@MappedSuperclass
 public abstract class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String firstName;
     private String lastName;
     private Long document;
