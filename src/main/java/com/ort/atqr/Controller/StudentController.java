@@ -21,8 +21,17 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<Student> login(@RequestBody Student student){
+        Student logged = studentService.login(student);
+
+        return new ResponseEntity<>(logged, HttpStatus.OK);
+
+    }
+
     @PostMapping(value = "/testlogin")
-    public Response login(@RequestBody Student student){
+    public Response testlogin(@RequestBody Student student){
         String message = "";
         int code = 500;
         Object object = null;

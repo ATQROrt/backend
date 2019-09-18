@@ -1,12 +1,15 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
+@Entity
 public class Assistance {
+    @Id
     private Long id;
     private AssistanceStatus status;
-    private Date date;
+    @OneToOne
     private Student student;
 
 }

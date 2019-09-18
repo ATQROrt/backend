@@ -2,6 +2,7 @@ package com.ort.atqr.Model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @MappedSuperclass
 public abstract class User {
@@ -17,6 +18,9 @@ public abstract class User {
     private String password;
     private Date createdAt;
 
+    @OneToMany(targetEntity=Course.class, fetch= FetchType.EAGER)
+    private Set<Course> courses;
+
     public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,6 +30,8 @@ public abstract class User {
         this.imageUrl = imageUrl;
         this.password = password;
     }
+
+    public User(){}
 
     @PrePersist
     private void createdAt(){
@@ -90,5 +96,17 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
     }
 }

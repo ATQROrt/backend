@@ -8,5 +8,6 @@ import java.util.List;
 public interface StudentRepository extends CrudRepository<Student, Long> {
     //Student findByDocument(Long document);
     //List<Student> findByfirstNameAndlastNameOrderBydocument(String firstName, String lastName);
-    //Student findStudentBydocumentAndpassword(Long document, String password);
+    Student findStudentByDocumentAndPassword(Long document, String password);
 }
+
