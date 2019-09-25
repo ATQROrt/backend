@@ -41,6 +41,18 @@ public class StudentController {
         return new ResponseEntity<>(newStudent, HttpStatus.OK);
     }
 
+    @PostMapping(value = "/createStudent")
+    public ResponseEntity<Student> createStudent(@RequestBody Student student){
+        Student newStudent = studentService.createNewStudent(student);
+        return new ResponseEntity<Student>(newStudent, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping(value = "/deleteStudent/{id}")
+    public ResponseEntity<Student> deleteStudent(@PathVariable Long id){
+        studentService.deleteStudent(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping(value = "/testlogin")
     public Response testlogin(@RequestBody Student student){
         String message = "";
