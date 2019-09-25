@@ -1,6 +1,7 @@
 package com.ort.atqr.Controller;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ort.atqr.Exception.UserNotFoundException;
 import com.ort.atqr.Model.Response;
 import com.ort.atqr.Model.Student;
@@ -10,24 +11,34 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+import java.util.Optional;
+
 @RestController
 @RequestMapping(value = "/student")
 public class StudentController {
 
     private final StudentService studentService;
+    private final ObjectMapper objectMapper;
 
     @Autowired
-    public StudentController(StudentService studentService) {
+    public StudentController(StudentService studentService, ObjectMapper objectMapper) {
         this.studentService = studentService;
+        this.objectMapper = objectMapper;
     }
 
 
     @PostMapping(value = "/login")
     public ResponseEntity<Student> login(@RequestBody Student student){
         Student logged = studentService.login(student);
-
         return new ResponseEntity<>(logged, HttpStatus.OK);
+    }
 
+    @PatchMapping()
+    public ResponseEntity<Optional<Student>> modify(@RequestBody Map<String, Object> update){
+        Student modified = objectMapper.convertValue(update, Student.class);
+        Optional<Student> newStudent = studentService.modify(modified);
+        return new ResponseEntity<>(newStudent, HttpStatus.OK);
     }
 
     @PostMapping(value = "/testlogin")

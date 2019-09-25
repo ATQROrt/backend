@@ -4,10 +4,12 @@ import com.ort.atqr.Exception.UserNotFoundException;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Model.User;
 import com.ort.atqr.Repository.StudentRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -37,7 +39,7 @@ public class StudentService {
     }
 
     public void createTest() {
-        Student myStudent = new Student("Juan", "Perez", 36375564L, "juan.perez@atqr.com", new Date(), null, "password");
+        Student myStudent = new Student("Juan", "Perez", 36375564L, "juan.perez@atqr.com", new Date(), "imagen.com", "password");
         studentRepository.save(myStudent);
     }
 
@@ -49,5 +51,16 @@ public class StudentService {
 
     public Boolean validate(User user){
         return true;
+    }
+
+    public Optional<Student> modify(Student student) {
+        Student std = studentRepository.findById(student.getId()).orElse(null);
+        if(std != null){
+            AttributeHelper.myCopyProperties(student, std);
+            studentRepository.save(std);
+            return Optional.of(std);
+        } else{
+            return Optional.empty();
+        }
     }
 }
