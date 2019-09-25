@@ -51,6 +51,12 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
+        Student studentFinded = studentService.getStudentById(id);
+        return new ResponseEntity<>(studentFinded, HttpStatus.FOUND);
+    }
+
     @PostMapping(value = "/testlogin")
     public Response testlogin(@RequestBody Student student){
         String message = "";
