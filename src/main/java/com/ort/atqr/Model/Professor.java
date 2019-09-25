@@ -1,8 +1,7 @@
 package com.ort.atqr.Model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class Professor extends User{

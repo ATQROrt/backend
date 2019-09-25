@@ -3,9 +3,7 @@ package com.ort.atqr.Service;
 import com.ort.atqr.Exception.ErrorMessage;
 import com.ort.atqr.Exception.UserNotFoundException;
 import com.ort.atqr.Model.Student;
-import com.ort.atqr.Model.User;
 import com.ort.atqr.Repository.StudentRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,13 +43,7 @@ public class StudentService {
     }
 
     public Student login(Student student) {
-        if(!validate(student))
-            return null;
         return studentRepository.findStudentByDocumentAndPassword(student.getDocument(), student.getPassword());
-    }
-
-    public Boolean validate(User user){
-        return true;
     }
 
     public Optional<Student> modify(Student student) {
@@ -74,7 +66,7 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-    public void validateStudentFields(Student student){
+    private void validateStudentFields(Student student){
         if(student.getFirstName() == null || student.getFirstName().isEmpty()){
             throw new IllegalArgumentException(ErrorMessage.STUDENT_NAME_EMPTY);
         }

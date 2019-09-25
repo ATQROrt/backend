@@ -17,7 +17,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/student")
 public class StudentController {
-
     private final StudentService studentService;
     private final ObjectMapper objectMapper;
 
@@ -27,29 +26,28 @@ public class StudentController {
         this.objectMapper = objectMapper;
     }
 
-
     @PostMapping(value = "/login")
     public ResponseEntity<Student> login(@RequestBody Student student){
         Student logged = studentService.login(student);
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 
-    @PatchMapping()
+    @PatchMapping
     public ResponseEntity<Optional<Student>> modify(@RequestBody Map<String, Object> update){
         Student modified = objectMapper.convertValue(update, Student.class);
         Optional<Student> newStudent = studentService.modify(modified);
         return new ResponseEntity<>(newStudent, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/createStudent")
+    @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student){
         Student newStudent = studentService.createNewStudent(student);
-        return new ResponseEntity<Student>(newStudent, HttpStatus.CREATED);
+        return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
     }
 
-    @DeleteMapping(value = "/deleteStudent/{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable Long id){
-        studentService.deleteStudent(id);
+    @DeleteMapping
+    public ResponseEntity<Student> deleteStudent(@RequestBody Student student){
+        studentService.deleteStudent(student.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
