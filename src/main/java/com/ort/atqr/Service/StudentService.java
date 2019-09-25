@@ -47,7 +47,7 @@ public class StudentService {
         return studentRepository.findStudentByDocumentAndPassword(student.getDocument(), student.getPassword());
     }
 
-    public Optional<Student> modify(Student student) {
+    public Optional<Student> updateStudent(Student student) {
         Student std = studentRepository.findById(student.getId()).orElse(null);
         if(std != null){
             AttributeHelper.myCopyProperties(student, std);
@@ -62,39 +62,13 @@ public class StudentService {
         return studentRepository.findById(id).orElse(null);
     }
 
-    public Student createNewStudent(Student student) throws IllegalArgumentException{
-        validateStudentFields(student);
+    public Student createNewStudent(Student student){
+        UserValidator.validateFields(student);
         return studentRepository.save(student);
     }
 
     public void deleteStudent(Long id){
         studentRepository.deleteById(id);
-    }
-
-    private void validateStudentFields(Student student){
-        if(student.getFirstName() == null || student.getFirstName().isEmpty()){
-            throw new IllegalArgumentException(ErrorMessage.STUDENT_NAME_EMPTY);
-        }
-
-        if(student.getLastName() == null || student.getLastName().isEmpty()){
-            throw new IllegalArgumentException(ErrorMessage.STUDENT_LAST_NAME_EMPTY);
-        }
-
-        if(student.getDocument() == null || student.getDocument() < 1){
-            throw new IllegalArgumentException(ErrorMessage.STUDENT_INVALID_DOCUMENT);
-        }
-
-        if(student.getBirth() == null || student.getBirth().before(new Date(111900)) || student.getBirth().after(new Date())){
-            throw new IllegalArgumentException(ErrorMessage.STUDENT_INVALID_BIRTHDATE);
-        }
-
-        if(student.getMail() == null){
-            throw new IllegalArgumentException(ErrorMessage.STUDENT_INVALID_MAIL);
-        }
-
-        if(student.getPassword() == null || student.getPassword().length() < 8 || student.getPassword().length() > 16){
-            throw new IllegalArgumentException(ErrorMessage.STUDENT_INVALID_PASSWORD);
-        }
     }
 
     public Optional<List<Student>> getAll() {

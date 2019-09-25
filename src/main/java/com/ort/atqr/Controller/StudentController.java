@@ -34,9 +34,9 @@ public class StudentController {
     }
 
     @PatchMapping
-    public ResponseEntity<Optional<Student>> modify(@RequestBody Map<String, Object> update){
+    public ResponseEntity<Optional<Student>> updateStudent(@RequestBody Map<String, Object> update){
         Student modified = objectMapper.convertValue(update, Student.class);
-        Optional<Student> newStudent = studentService.modify(modified);
+        Optional<Student> newStudent = studentService.updateStudent(modified);
         return new ResponseEntity<>(newStudent, HttpStatus.OK);
     }
 
