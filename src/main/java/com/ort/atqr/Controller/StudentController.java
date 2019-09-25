@@ -28,8 +28,8 @@ public class StudentController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<Student> login(@RequestBody Student student){
-        Student logged = studentService.login(student);
+    public ResponseEntity<Optional<Student>> login(@RequestBody Student student){
+        Optional<Student> logged = studentService.login(student);
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 

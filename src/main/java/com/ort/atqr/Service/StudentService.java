@@ -43,8 +43,8 @@ public class StudentService {
         studentRepository.save(myStudent);
     }
 
-    public Student login(Student student) {
-        return studentRepository.findStudentByDocumentAndPassword(student.getDocument(), student.getPassword());
+    public Optional<Student> login(Student student) {
+        return Optional.ofNullable(studentRepository.findStudentByDocumentAndPassword(student.getDocument(), student.getPassword()));
     }
 
     public Optional<Student> modify(Student student) {
