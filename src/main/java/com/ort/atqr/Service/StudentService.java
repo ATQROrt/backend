@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -90,5 +91,9 @@ public class StudentService {
         if(student.getPassword() == null || student.getPassword().length() < 8 || student.getPassword().length() > 16){
             throw new IllegalArgumentException(ErrorMessage.STUDENT_INVALID_PASSWORD);
         }
+    }
+
+    public Optional<List<Student>> getAll() {
+        return Optional.ofNullable((List<Student>) studentRepository.findAll());
     }
 }
