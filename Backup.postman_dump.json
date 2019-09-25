@@ -1,0 +1,241 @@
+{
+	"version": 1,
+	"collections": [
+		{
+			"id": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+			"name": "ATQR - Student",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"variables": [],
+			"order": [
+				"9de56163-ade4-453c-be39-23fa6a429c6d",
+				"affd02da-0d5c-490b-a1d3-4d9a10a55dd8",
+				"7a3ffb53-a38b-4442-a8d0-bef92218dd16",
+				"6c683a99-6783-4609-aa72-bb4ac63e3d11",
+				"9b8ec4fa-b18e-4e61-b460-73fd647c1849",
+				"ba8e89de-d50a-48c3-ae78-517331336bf1"
+			],
+			"folders_order": [],
+			"protocolProfileBehavior": {},
+			"folders": [],
+			"requests": [
+				{
+					"id": "6c683a99-6783-4609-aa72-bb4ac63e3d11",
+					"name": "CREATE Student",
+					"url": "{{APIHOST}}/student",
+					"description": "",
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [
+						{
+							"description": "",
+							"key": "Content-Type",
+							"name": "Content-Type",
+							"type": "text",
+							"value": "application/json"
+						}
+					],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+					"rawModeData": "{\r\n    \"firstName\": \"PrimerNombre\",\r\n    \"lastName\": \"Apellido\",\r\n    \"document\": 12345678,\r\n    \"mail\": \"primer.nombre@atqr.com\",\r\n    \"birth\": \"2019-09-24T21:33:03.125+0000\",\r\n    \"imageUrl\": \"imagen.com\",\r\n    \"password\": \"contrasena\"\r\n}",
+					"headers": "Content-Type: application/json\n",
+					"pathVariables": {}
+				},
+				{
+					"id": "7a3ffb53-a38b-4442-a8d0-bef92218dd16",
+					"name": "LOGIN Student",
+					"url": "{{APIHOST}}/student/login",
+					"description": "",
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [
+						{
+							"key": "Content-Type",
+							"name": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"method": "POST",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+					"rawModeData": "{\n\t\"document\": 36375564,\n\t\"password\": \"password\"\n}",
+					"headers": "Content-Type: application/json\n",
+					"pathVariables": {}
+				},
+				{
+					"id": "9b8ec4fa-b18e-4e61-b460-73fd647c1849",
+					"name": "UPDATE Student",
+					"url": "{{APIHOST}}/student/3",
+					"description": "",
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [
+						{
+							"description": "",
+							"key": "Content-Type",
+							"name": "Content-Type",
+							"type": "text",
+							"value": "application/json"
+						}
+					],
+					"method": "PATCH",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+					"rawModeData": "{\r\n    \"firstName\": \"Nuevo nombrardoo\"\r\n}",
+					"headers": "Content-Type: application/json\n",
+					"pathVariables": {}
+				},
+				{
+					"id": "9de56163-ade4-453c-be39-23fa6a429c6d",
+					"name": "GET ALL Students",
+					"url": "{{APIHOST}}/student",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "affd02da-0d5c-490b-a1d3-4d9a10a55dd8",
+					"name": "GET Student",
+					"url": "{{APIHOST}}/student/1",
+					"description": "",
+					"data": null,
+					"dataOptions": null,
+					"dataMode": null,
+					"headerData": [],
+					"method": "GET",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+					"headers": "",
+					"pathVariables": {}
+				},
+				{
+					"id": "ba8e89de-d50a-48c3-ae78-517331336bf1",
+					"name": "DELETE Student",
+					"url": "{{APIHOST}}/student",
+					"description": "",
+					"data": [],
+					"dataOptions": {
+						"raw": {
+							"language": "json"
+						}
+					},
+					"dataMode": "raw",
+					"headerData": [
+						{
+							"key": "Content-Type",
+							"name": "Content-Type",
+							"value": "application/json",
+							"description": "",
+							"type": "text"
+						}
+					],
+					"method": "DELETE",
+					"pathVariableData": [],
+					"queryParams": [],
+					"auth": null,
+					"events": [],
+					"folder": null,
+					"currentHelper": null,
+					"helperAttributes": null,
+					"collectionId": "ca5e0630-4419-46b2-b61b-b31ffb657cee",
+					"rawModeData": "{\n\t\"id\": 4\n}",
+					"headers": "Content-Type: application/json\n",
+					"pathVariables": {}
+				}
+			]
+		}
+	],
+	"environments": [
+		{
+			"id": "6eb214f8-c257-47e5-9607-87ab8f850d27",
+			"name": "LOCALHOST",
+			"values": [
+				{
+					"key": "APIHOST",
+					"value": "localhost:8080",
+					"enabled": true
+				}
+			]
+		},
+		{
+			"id": "d08994d9-12a3-40e5-93a4-cbf604e502ef",
+			"name": "PRODUCTION",
+			"values": [
+				{
+					"key": "APIHOST",
+					"value": "https://obscure-taiga-98790.herokuapp.com/",
+					"enabled": true
+				}
+			]
+		},
+		{
+			"id": "355a94c8-8dd3-43e1-b2bf-db575f0f1a55",
+			"name": "My Workspace - globals",
+			"values": [
+				{
+					"key": "APIHOST",
+					"value": "",
+					"enabled": true
+				}
+			]
+		}
+	],
+	"headerPresets": [],
+	"globals": []
+}

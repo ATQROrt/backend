@@ -28,14 +28,15 @@ public class StudentController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<Student> login(@RequestBody Student student){
-        Student logged = studentService.login(student);
+    public ResponseEntity<Optional<Student>> login(@RequestBody Student student){
+        Optional<Student> logged = studentService.login(student);
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 
-    @PatchMapping
-    public ResponseEntity<Optional<Student>> updateStudent(@RequestBody Map<String, Object> update){
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Optional<Student>> updateStudent(@PathVariable Long id, @RequestBody Map<String, Object> update){
         Student modified = objectMapper.convertValue(update, Student.class);
+        modified.setId(id);
         Optional<Student> newStudent = studentService.updateStudent(modified);
         return new ResponseEntity<>(newStudent, HttpStatus.OK);
     }
