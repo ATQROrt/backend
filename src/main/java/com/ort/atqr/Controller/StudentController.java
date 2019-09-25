@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -57,6 +58,13 @@ public class StudentController {
         return new ResponseEntity<>(studentFinded, HttpStatus.FOUND);
     }
 
+    @GetMapping
+    public ResponseEntity<Optional<List<Student>>> getAllStudents(){
+        Optional<List<Student>> students = studentService.getAll();
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+    //TEST METHODS
     @PostMapping(value = "/testlogin")
     public Response testlogin(@RequestBody Student student){
         String message = "";
