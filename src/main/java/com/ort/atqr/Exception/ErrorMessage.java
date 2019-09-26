@@ -1,12 +1,23 @@
 package com.ort.atqr.Exception;
 
-public interface ErrorMessage {
-    String STUDENT_NAME_EMPTY = "Student's name can't be null or empty";
-    String STUDENT_LAST_NAME_EMPTY = "Student's last name can't be null or empty";
-    String STUDENT_INVALID_DOCUMENT = "Student's document can't be null and must be a valid number";
-    String STUDENT_INVALID_BIRTHDATE = "Student's birth date can't be null and must be a valid date";
-    String STUDENT_INVALID_MAIL = "Student's mail can't be null";
-    String STUDENT_INVALID_PASSWORD = "Student's password can't be null and must be between 8 an 16 characters";
+public enum ErrorMessage {
+    INVALID_NAME("Name must be valid"),
+    INVALID_LAST_NAME("Last name can't be null or empty"),
+    INVALID_DOCUMENT("Document can't be null and must be a valid number"),
+    INVALID_BIRTHDATE("Birth date can't be null and must be a valid date"),
+    INVALID_MAIL("Mail can't be null"),
+    INVALID_PASSWORD("Password can't be null and must be between 8 an 16 characters"),
+    INVALID_CODE("Code must be valid"),
+    INVALID_INFO("Information is invalid"),
+    NOT_FOUND("We couldn't find what you were looking for");
 
+    private String message;
 
+    ErrorMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
 }

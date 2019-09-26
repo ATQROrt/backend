@@ -25,32 +25,32 @@ public class ProfessorController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<Professor> professorLogIn(@RequestBody Professor professor){
+    public ResponseEntity<Professor> professorLogIn(@RequestBody Professor professor) {
         Professor logged = professorService.login(professor);
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 
     @PatchMapping
-    public ResponseEntity<Optional<Professor>> updateProfessor(@RequestBody Map<String, Object> update){
+    public ResponseEntity<Optional<Professor>> updateProfessor(@RequestBody Map<String, Object> update) {
         Professor modified = objectMapper.convertValue(update, Professor.class);
         Optional<Professor> newProfessor = professorService.updateProfessor(modified);
         return new ResponseEntity<>(newProfessor, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Professor> createProfessor(@RequestBody Professor professor){
+    public ResponseEntity<Professor> createProfessor(@RequestBody Professor professor) {
         Professor newProfessor = professorService.createNewProfessor(professor);
         return new ResponseEntity<>(newProfessor, HttpStatus.CREATED);
     }
 
     @DeleteMapping
-    public ResponseEntity<Professor> deleteProfessor(@RequestBody Professor professor){
+    public ResponseEntity<Professor> deleteProfessor(@RequestBody Professor professor) {
         professorService.deleteProfessor(professor.getId());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Professor> getStudentById(@PathVariable Long id){
+    public ResponseEntity<Professor> getStudentById(@PathVariable Long id) {
         Professor professorFinded = professorService.getProfessorById(id);
         return new ResponseEntity<>(professorFinded, HttpStatus.FOUND);
     }

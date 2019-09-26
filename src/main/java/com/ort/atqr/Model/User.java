@@ -1,11 +1,14 @@
 package com.ort.atqr.Model;
 
+import com.ort.atqr.Exception.ErrorMessage;
+import com.ort.atqr.Exception.InvalidInputException;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @MappedSuperclass
-public abstract class User {
+public abstract class User implements Validatable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +21,7 @@ public abstract class User {
     private String password;
     private Date createdAt;
 
-    @OneToMany(targetEntity=Course.class, fetch= FetchType.EAGER)
+    @OneToMany(targetEntity = Course.class, fetch = FetchType.EAGER)
     private Set<Course> courses;
 
     public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
@@ -31,10 +34,38 @@ public abstract class User {
         this.password = password;
     }
 
-    public User(){}
+    public User() {
+    }
+
+    @Override
+    public void validate() throws InvalidInputException {
+        if (this.firstName == null || this.firstName.isEmpty()) {
+            throw new InvalidInputException(ErrorMessage.INVALID_NAME);
+        }
+
+        if (this.lastName == null || this.lastName.isEmpty()) {
+            throw new InvalidInputException(ErrorMessage.INVALID_LAST_NAME);
+        }
+
+        if (this.document == null || this.document < 1) {
+            throw new InvalidInputException(ErrorMessage.INVALID_DOCUMENT);
+        }
+
+        if (this.birth == null || this.birth.before(new Date(111900)) || this.birth.after(new Date())) {
+            throw new InvalidInputException(ErrorMessage.INVALID_BIRTHDATE);
+        }
+
+        if (this.getMail() == null || !this.getMail().contains("@")) {
+            throw new InvalidInputException(ErrorMessage.INVALID_MAIL);
+        }
+
+        if (this.password == null || this.password.length() < 8 || this.password.length() > 16) {
+            throw new InvalidInputException(ErrorMessage.INVALID_PASSWORD);
+        }
+    }
 
     @PrePersist
-    private void createdAt(){
+    private void createdAt() {
         this.createdAt = new Date();
     }
 
@@ -102,15 +133,15 @@ public abstract class User {
         return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Set<Course> getCourses() {
         return courses;
     }
 
     public void setCourses(Set<Course> courses) {
         this.courses = courses;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

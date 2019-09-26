@@ -9,11 +9,11 @@ public class Course {
     private String code;
     @OneToOne
     private Asignature asignature;
-    @OneToMany(targetEntity=Student.class, fetch= FetchType.EAGER)
+    @OneToMany(targetEntity = Student.class, fetch = FetchType.EAGER)
     private Set<Student> studentsList;
     @OneToOne
     private Professor professor;
-    @OneToMany(targetEntity=ClassDay.class, fetch= FetchType.EAGER)
+    @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.EAGER)
     private Set<ClassDay> classDayList;
 
     public String getCode() {

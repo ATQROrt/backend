@@ -1,5 +1,6 @@
 package com.ort.atqr.Service;
 
+import com.ort.atqr.Exception.InvalidInputException;
 import com.ort.atqr.Model.Professor;
 import com.ort.atqr.Repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,25 +25,30 @@ public class ProfessorService {
 
     public Optional<Professor> updateProfessor(Professor professor) {
         Professor std = professorRepository.findById(professor.getId()).orElse(null);
-        if(std != null){
+        if (std != null) {
             AttributeHelper.myCopyProperties(professor, std);
             professorRepository.save(std);
             return Optional.of(std);
-        } else{
+        } else {
             return Optional.empty();
         }
     }
 
-    public Professor getProfessorById(Long id){
+    public Professor getProfessorById(Long id) {
         return professorRepository.findById(id).orElse(null);
     }
 
-    public Professor createNewProfessor(Professor professor){
-        UserValidator.validateFields(professor);
-        return professorRepository.save(professor);
+    public Professor createNewProfessor(Professor professor) {
+        try {
+            professor.validate();
+            return professorRepository.save(professor);
+        } catch (InvalidInputException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public void deleteProfessor(Long id){
+    public void deleteProfessor(Long id) {
         professorRepository.deleteById(id);
     }
 

@@ -5,7 +5,7 @@ public class Response {
     private String message;
     private Integer statusCode;
 
-    public Response(Object object, String message, Integer status){
+    public Response(Object object, String message, Integer status) {
         this.object = object;
         this.message = message;
         this.statusCode = status;

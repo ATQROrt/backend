@@ -9,7 +9,7 @@ public class ClassDay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToMany(targetEntity=Assistance.class, fetch= FetchType.EAGER)
+    @OneToMany(targetEntity = Assistance.class, fetch = FetchType.EAGER)
     private Set<Assistance> assistance;
     private Date date;
     private Boolean cancelled;
