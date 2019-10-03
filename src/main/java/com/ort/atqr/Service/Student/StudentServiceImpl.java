@@ -1,8 +1,9 @@
-package com.ort.atqr.Service;
+package com.ort.atqr.Service.Student;
 
 import com.ort.atqr.Exception.InvalidInputException;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Repository.StudentRepository;
+import com.ort.atqr.Service.AttributeHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StudentService {
+public class StudentServiceImpl implements StudentService{
 
     private StudentRepository studentRepository;
 
     @Autowired
-    public StudentService(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
