@@ -10,7 +10,7 @@ public class ClassDay {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany(targetEntity = Assistance.class, fetch = FetchType.EAGER)
-    private Set<Assistance> assistance;
+    private Assistance assistance;
     private Date date;
     private Boolean cancelled;
 
@@ -18,11 +18,11 @@ public class ClassDay {
         return id;
     }
 
-    public Set<Assistance> getAssistance() {
+    public Assistance getAssistance() {
         return assistance;
     }
 
-    public void setAssistance(Set<Assistance> assistance) {
+    public void setAssistance(Assistance assistance) {
         this.assistance = assistance;
     }
 

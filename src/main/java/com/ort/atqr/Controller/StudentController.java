@@ -3,6 +3,7 @@ package com.ort.atqr.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ort.atqr.Model.Asignature;
+import com.ort.atqr.Model.Assistance;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Service.Student.StudentServiceImpl;
@@ -78,4 +79,9 @@ public class StudentController {
         List<Course> courses = studentServiceImpl.getStudentCourses(id);
         return new ResponseEntity<>(courses, HttpStatus.FOUND);
     }
+/*
+    @GetMapping
+    public ResponseEntity<List<Assistance>>
+    */
+    //me parece que en assistance hay una clase de por medio al pedo, con course podemos tener direcatmente assitance y de ahi el status y la fecha, para que tiene un id asistencia?
 }

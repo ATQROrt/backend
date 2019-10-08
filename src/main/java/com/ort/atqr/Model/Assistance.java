@@ -10,4 +10,16 @@ public class Assistance {
     private AssistanceStatus status;
     @OneToOne
     private Student student;
+
+    public AssistanceStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AssistanceStatus status) {
+        this.status = status;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
 }
