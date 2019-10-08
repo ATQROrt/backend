@@ -4,6 +4,7 @@ import com.ort.atqr.Exception.InvalidInputException;
 import com.ort.atqr.Model.Asignature;
 import com.ort.atqr.Repository.AsignatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
@@ -25,5 +26,4 @@ public class AsignatureServiceImpl {
     }
 
     public void deleteAsignature(Long id){asignatureRepository.deleteById(id);}
-
 }

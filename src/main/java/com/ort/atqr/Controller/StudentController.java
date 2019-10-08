@@ -2,6 +2,8 @@ package com.ort.atqr.Controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ort.atqr.Model.Asignature;
+import com.ort.atqr.Model.Course;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Service.Student.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +63,19 @@ public class StudentController {
     public ResponseEntity<Optional<List<Student>>> getAllStudents() {
         Optional<List<Student>> students = studentServiceImpl.getAll();
         return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+    /*
+    @GetMapping
+    public ResponseEntity<List<Asignature>> getAllStudentAsignatures(@PathVariable Long id){
+        List<Asignature> asignatures = studentServiceImpl.getStudentAsignatures(id);
+        return new ResponseEntity<>(asignatures, HttpStatus.FOUND);
+    }
+    */
+
+    @GetMapping
+    public ResponseEntity<List<Course>> getAllStudentCourses(@PathVariable Long id){
+        List<Course> courses = studentServiceImpl.getStudentCourses(id);
+        return new ResponseEntity<>(courses, HttpStatus.FOUND);
     }
 }
