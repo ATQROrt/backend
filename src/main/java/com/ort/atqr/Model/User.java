@@ -5,6 +5,7 @@ import com.ort.atqr.Exception.InvalidInputException;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @MappedSuperclass
@@ -22,7 +23,7 @@ public abstract class User implements Validatable {
     private Date createdAt;
 
     @OneToMany(targetEntity = Course.class, fetch = FetchType.EAGER)
-    private Set<Course> courses;
+    private List<Course> courses;
 
     public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
         this.firstName = firstName;
@@ -137,11 +138,11 @@ public abstract class User implements Validatable {
         this.id = id;
     }
 
-    public Set<Course> getCourses() {
+    public List<Course> getCourses() {
         return courses;
     }
 
-    public void setCourses(Set<Course> courses) {
+    public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
 }

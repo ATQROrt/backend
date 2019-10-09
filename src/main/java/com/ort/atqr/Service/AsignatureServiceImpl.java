@@ -5,9 +5,11 @@ import com.ort.atqr.Model.Asignature;
 import com.ort.atqr.Repository.AsignatureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class AsignatureServiceImpl {
 
     private AsignatureRepository asignatureRepository;
@@ -25,5 +27,5 @@ public class AsignatureServiceImpl {
         }
     }
 
-    public void deleteAsignature(Long id){asignatureRepository.deleteById(id);}
+    public void deleteAsignature(String id){asignatureRepository.deleteById(id);}
 }

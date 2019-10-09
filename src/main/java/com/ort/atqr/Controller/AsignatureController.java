@@ -1,6 +1,5 @@
 package com.ort.atqr.Controller;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ort.atqr.Model.Asignature;
 import com.ort.atqr.Service.AsignatureServiceImpl;
@@ -29,7 +28,8 @@ public class AsignatureController {
 
     @DeleteMapping
     public ResponseEntity<Asignature> deleteAsignature(@RequestBody Asignature asignature){
-        asignatureServiceImpl.deleteAsignature(asignature);
+        asignatureServiceImpl.deleteAsignature(asignature.getCode());
+        return new ResponseEntity<Asignature>(asignature, HttpStatus.NO_CONTENT);
     }
 
 }

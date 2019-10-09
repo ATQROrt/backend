@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService{
 
     public List<Course> getStudentCourses(Long id){
         Student student = getStudentById(id);
-        return student.getStudentCourses();
+        return student.getCourses();
     }
 
     public Student createNewStudent(Student student) {

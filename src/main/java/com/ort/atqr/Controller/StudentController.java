@@ -2,8 +2,6 @@ package com.ort.atqr.Controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ort.atqr.Model.Asignature;
-import com.ort.atqr.Model.Assistance;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Service.Student.StudentServiceImpl;
@@ -74,7 +72,7 @@ public class StudentController {
     }
     */
 
-    @GetMapping
+    @GetMapping(value = "/{id}/courses")
     public ResponseEntity<List<Course>> getAllStudentCourses(@PathVariable Long id){
         List<Course> courses = studentServiceImpl.getStudentCourses(id);
         return new ResponseEntity<>(courses, HttpStatus.FOUND);

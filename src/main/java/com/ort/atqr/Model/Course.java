@@ -15,7 +15,7 @@ public class Course {
     private Set<Student> studentsList;
     @OneToOne
     private Professor professor;
-    @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.LAZY)
     private List<ClassDay> classDayList;
 
     public String getCode() {
@@ -66,7 +66,7 @@ public class Course {
 
         int presentClassDays = 0;
         for(int i = 0; i<allClassDays; i++){
-            if(classDayList.get(i).getAssistance().getStatus() == AssistanceStatus.PRESENT){
+            if(classDayList.get(i).getAssistanceStatus() == AssistanceStatus.PRESENT){
                 presentClassDays++;
             }
         }
