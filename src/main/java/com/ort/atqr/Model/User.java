@@ -12,6 +12,7 @@ import java.util.Set;
 public abstract class User implements Validatable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Access(AccessType.PROPERTY)
     private Long id;
     private String firstName;
     private String lastName;

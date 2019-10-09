@@ -12,6 +12,13 @@ public class Asignature implements Validatable {
     private String code;
     private String name;
 
+    public Asignature() { }
+
+    public Asignature(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     public String getCode() {
         return code;
     }
@@ -25,11 +32,6 @@ public class Asignature implements Validatable {
     }
 
     public void setName(String name) {
-        this.name = name;
-    }
-
-    public Asignature(String code, String name) {
-        this.code = code;
         this.name = name;
     }
 
