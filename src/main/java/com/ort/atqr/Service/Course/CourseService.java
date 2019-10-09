@@ -1,6 +1,8 @@
 package com.ort.atqr.Service.Course;
 
 import com.ort.atqr.Exception.InvalidInputException;
+import com.ort.atqr.Model.AssistanceStatus;
+import com.ort.atqr.Model.ClassDay;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Repository.CourseRepository;
@@ -33,7 +35,7 @@ public class CourseService {
     public Optional<List<Course>> getAll() {
         return Optional.ofNullable((List<Course>) courseRepository.findAll());
     }
-
+/*
     public void assignStudent(Long id, Student student){
         Optional<Course> course = getById(id);
         if(course.isPresent()){
@@ -42,9 +44,27 @@ public class CourseService {
             courseRepository.save(c);
         }
     }
-
-    public Optional<Course> getById(Long id) {
-        return courseRepository.findById(id) ;
+*/
+    public Course getById(Long id) {
+        return courseRepository.findById(id).orElse(null) ;
     }
 
+    /*
+    public Integer assistancePercentage(Student student, Long id){
+        Course course = getById(id);
+
+        if(course.getClassDayList().isEmpty()){
+            throw new IllegalArgumentException("The classday list can't be empty. ");
+        }
+
+        int presentClassDays = 0;
+        for(ClassDay classDay : course.getClassDayList()){
+            classDay.getAssistanceList().findAssistanceStatusByStudent(student)
+        }
+            if(classDayList.get(i).getAssistanceList(). == AssistanceStatus.PRESENT){
+                presentClassDays++;
+        }
+        return (allClassDays*presentClassDays)/100;
+    }
+*/
 }

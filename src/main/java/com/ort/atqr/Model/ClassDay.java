@@ -2,6 +2,7 @@ package com.ort.atqr.Model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -9,21 +10,17 @@ public class ClassDay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Enumerated
-    private AssistanceStatus assistanceStatus;
+    @OneToMany(targetEntity = Assistance.class, fetch = FetchType.LAZY)
+    private List<Assistance> assistanceList;
     private Date date;
     private Boolean cancelled;
 
-    public Long getId() {
-        return id;
+    public List<Assistance> getAssistanceList() {
+        return assistanceList;
     }
 
-    public AssistanceStatus getAssistanceStatus() {
-        return assistanceStatus;
-    }
-
-    public void setAssistanceStatus(AssistanceStatus assistanceStatus) {
-        this.assistanceStatus = assistanceStatus;
+    public void setAssistanceList(List<Assistance> assistanceList) {
+        this.assistanceList = assistanceList;
     }
 
     public Date getDate() {

@@ -39,7 +39,7 @@ public class CourseController {
 
     @PostMapping(value = "/{id}")
     public ResponseEntity<Course> assignStudent(@PathVariable Long id, @RequestBody Student student){
-        courseService.assignStudent(id, student);
+        //courseService.assignStudent(id, student);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

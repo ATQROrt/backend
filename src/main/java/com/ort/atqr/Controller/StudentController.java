@@ -69,11 +69,6 @@ public class StudentController {
     }
     */
 
-    @GetMapping(value = "/{id}/courses")
-    public ResponseEntity<List<Course>> getAllStudentCourses(@PathVariable Long id){
-        List<Course> courses = studentServiceImpl.getStudentCourses(id);
-        return new ResponseEntity<>(courses, HttpStatus.FOUND);
-    }
 /*
     @GetMapping
     public ResponseEntity<List<Assistance>>
