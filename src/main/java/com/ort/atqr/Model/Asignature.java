@@ -28,6 +28,11 @@ public class Asignature implements Validatable {
         this.name = name;
     }
 
+    public Asignature(String code, String name) {
+        this.code = code;
+        this.name = name;
+    }
+
     @Override
     public void validate() throws InvalidInputException {
         if (code == null || code.isEmpty()) {

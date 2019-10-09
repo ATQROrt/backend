@@ -22,7 +22,7 @@ public abstract class User implements Validatable {
     private String password;
     private Date createdAt;
 
-    @OneToMany(targetEntity = Course.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Course.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Course> courses;
 
     public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {

@@ -9,6 +9,7 @@ public class ClassDay {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Enumerated
     private AssistanceStatus assistanceStatus;
     private Date date;
     private Boolean cancelled;

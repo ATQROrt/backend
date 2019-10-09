@@ -2,17 +2,14 @@ package com.ort.atqr.Controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ort.atqr.Model.Course;
-import com.ort.atqr.Model.Student;
+import com.ort.atqr.Model.*;
 import com.ort.atqr.Service.Student.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/student")
@@ -42,6 +39,17 @@ public class StudentController {
 
     @PostMapping
     public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+        List<Course> courses = new ArrayList<Course>();
+        Course course = new Course();
+        course.setAsignature(new Asignature("Atr1", "Programacion 1"));
+        ClassDay classDay = new ClassDay();
+        classDay.setAssistanceStatus(AssistanceStatus.PRESENT);
+        classDay.setDate(new Date());
+        List<ClassDay> classDayList = new ArrayList<ClassDay>();
+        classDayList.add(classDay);
+        course.setClassDayList(classDayList);
+        courses.add(course);
+        student.setCourses(courses);
         Student newStudent = studentServiceImpl.createNewStudent(student);
         return new ResponseEntity<>(newStudent, HttpStatus.CREATED);
     }

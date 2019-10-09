@@ -8,8 +8,9 @@ import java.util.Set;
 @Entity
 public class Course {
     @Id
-    private String code;
-    @OneToOne
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
     private Asignature asignature;
     @OneToMany(targetEntity = Student.class, fetch = FetchType.EAGER)
     private Set<Student> studentsList;
@@ -18,12 +19,12 @@ public class Course {
     @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.LAZY)
     private List<ClassDay> classDayList;
 
-    public String getCode() {
-        return code;
+    public Long getId() {
+        return id;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Asignature getAsignature() {
