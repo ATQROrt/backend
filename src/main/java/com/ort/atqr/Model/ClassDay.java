@@ -1,12 +1,15 @@
 package com.ort.atqr.Model;
 
+import com.ort.atqr.Exception.InvalidInputException;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
 @Entity
-public class ClassDay {
+public class ClassDay{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -16,8 +19,17 @@ public class ClassDay {
     private Boolean cancelled;
 
     public ClassDay(){
+        this.assistanceList = new ArrayList<>();
         this.date = new Date();
         this.cancelled = false;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public List<Assistance> getAssistanceList() {
@@ -43,4 +55,5 @@ public class ClassDay {
     public void setCancelled(Boolean cancelled) {
         this.cancelled = cancelled;
     }
+
 }

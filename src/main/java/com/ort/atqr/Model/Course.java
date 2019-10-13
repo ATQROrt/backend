@@ -32,6 +32,10 @@ public class Course implements Validatable {
         }
     }
 
+    public void addClass(ClassDay classDay){
+        this.classDayList.add(classDay);
+    }
+
     public void addStudent(Student student){
         this.students.add(student);
     }
