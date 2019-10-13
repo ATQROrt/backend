@@ -9,6 +9,7 @@ import com.ort.atqr.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,18 +36,17 @@ public class CourseService {
     public Optional<List<Course>> getAll() {
         return Optional.ofNullable((List<Course>) courseRepository.findAll());
     }
-/*
-    public void assignStudent(Long id, Student student){
-        Optional<Course> course = getById(id);
-        if(course.isPresent()){
-            Course c = course.get();
-            c.getStudentsList().add(student);
-            courseRepository.save(c);
-        }
-    }
-*/
+
     public Course getById(Long id) {
         return courseRepository.findById(id).orElse(null) ;
+    }
+
+    public void assignStudent(Long id, Student student) {
+        Course course = getById(id);
+        if(course != null){
+            course.getStudents().add(student);
+            courseRepository.save(course);
+        }
     }
 
     /*

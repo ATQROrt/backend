@@ -37,9 +37,15 @@ public class CourseController {
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Course> get(@PathVariable Long id){
+        Course course = courseService.getById(id);
+        return new ResponseEntity<>(course, HttpStatus.OK);
+    }
+
     @PostMapping(value = "/{id}")
     public ResponseEntity<Course> assignStudent(@PathVariable Long id, @RequestBody Student student){
-        //courseService.assignStudent(id, student);
+        courseService.assignStudent(id, student);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

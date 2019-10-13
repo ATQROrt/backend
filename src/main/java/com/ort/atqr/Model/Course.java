@@ -4,23 +4,26 @@ import com.ort.atqr.Exception.ErrorMessage;
 import com.ort.atqr.Exception.InvalidInputException;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Course implements Validatable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private Asignature asignature;
     @OneToOne
     private Professor professor;
     @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.LAZY)
     private List<ClassDay> classDayList;
-    //private List<Student> students;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "Student_Course_Intermediate",
+            joinColumns = { @JoinColumn(name = "course_id") },
+            inverseJoinColumns = { @JoinColumn(name = "student_id") }
+    )
+    private List<Student> students;
 
     @Override
     public void validate() throws InvalidInputException {
@@ -51,5 +54,21 @@ public class Course implements Validatable {
 
     public void setClassDayList(List<ClassDay> classDayList) {
         this.classDayList = classDayList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }
