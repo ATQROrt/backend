@@ -59,8 +59,8 @@ public class CourseController {
     }
 
     @PostMapping(value = "/{id}/class")
-    public ResponseEntity<ClassDay> createClass(@PathVariable Long id){
-        classDayService.create(id);
+    public ResponseEntity<ClassDay> createClass(@PathVariable Professor professor){
+        classDayService.create(professor.getId());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
