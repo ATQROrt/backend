@@ -76,6 +76,16 @@ public class CourseService {
         }
     }
 
+    public List<Course> getProfessorCourses(Long id) {
+        List<Course> courses = new ArrayList<>();
+        List<Long> coursesIds = courseRepository.getProfessorCourses(id);
+
+        for(Long courseId : coursesIds){
+            courses.add(getById(courseId));
+        }
+
+        return courses;
+    }
 
     /*
     public Integer assistancePercentage(Student student, Long id){

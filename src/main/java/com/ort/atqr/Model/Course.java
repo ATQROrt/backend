@@ -14,7 +14,7 @@ public class Course implements Validatable {
     private Long id;
     @OneToOne(cascade = CascadeType.REFRESH)
     private Asignature asignature;
-    @OneToOne
+    @ManyToOne
     private Professor professor;
     @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.LAZY)
     private List<ClassDay> classDayList;
