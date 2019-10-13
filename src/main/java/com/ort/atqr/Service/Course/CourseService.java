@@ -8,6 +8,8 @@ import com.ort.atqr.Service.Student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +50,18 @@ public class CourseService {
             course.addStudent(std);
             courseRepository.save(course);
         }
+    }
+
+
+    public List<Course> getCourses(Long id) {
+        List<Course> courses = new ArrayList<>();
+        List<Long> coursesIds = courseRepository.getStudentCoursesById(id);
+
+        for(Long courseId : coursesIds){
+            courses.add(getById(courseId));
+        }
+
+        return courses;
     }
 
 

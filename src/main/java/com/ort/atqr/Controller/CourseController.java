@@ -1,10 +1,8 @@
 package com.ort.atqr.Controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ort.atqr.Model.Asignature;
-import com.ort.atqr.Model.Course;
-import com.ort.atqr.Model.Professor;
-import com.ort.atqr.Model.Student;
+import com.ort.atqr.Model.*;
+import com.ort.atqr.Service.ClassDayService;
 import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +18,13 @@ import java.util.Optional;
 @RequestMapping(value = "/course")
 public class CourseController {
     private final CourseService courseService;
+    private final ClassDayService classDayService;
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public CourseController(CourseService courseService, ObjectMapper objectMapper) {
+    public CourseController(CourseService courseService, ClassDayService classDayService, ObjectMapper objectMapper) {
         this.courseService = courseService;
+        this.classDayService = classDayService;
         this.objectMapper = objectMapper;
     }
 
@@ -50,5 +50,18 @@ public class CourseController {
     public ResponseEntity<Course> assignStudent(@PathVariable Long id, @RequestBody Student student){
         courseService.assignStudent(id, student);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/{id}/class")
+    public ResponseEntity<ClassDay> createClass(@PathVariable Long id){
+        classDayService.create(id);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+
+    @PostMapping(value = "/student")
+    public ResponseEntity<List<Course>> getCourses(@RequestBody Student student){
+        List<Course> courses = courseService.getCourses(student.getId());
+        return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 public class Course implements Validatable {
     @Id
+    @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne(cascade = CascadeType.REFRESH)
@@ -30,6 +31,10 @@ public class Course implements Validatable {
         if (this.asignature == null) {
             throw new InvalidInputException(ErrorMessage.INVALID_ASSIGNATURE);
         }
+    }
+
+    public void addClass(ClassDay classDay){
+        this.classDayList.add(classDay);
     }
 
     public void addStudent(Student student){
