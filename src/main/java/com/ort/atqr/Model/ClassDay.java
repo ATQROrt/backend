@@ -15,6 +15,11 @@ public class ClassDay {
     private Date date;
     private Boolean cancelled;
 
+    public ClassDay(){
+        this.date = new Date();
+        this.cancelled = false;
+    }
+
     public List<Assistance> getAssistanceList() {
         return assistanceList;
     }

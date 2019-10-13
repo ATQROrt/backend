@@ -20,6 +20,7 @@ public class Course implements Validatable {
     private Professor professor;
     @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.LAZY)
     private List<ClassDay> classDayList;
+    //private List<Student> students;
 
     @Override
     public void validate() throws InvalidInputException {
