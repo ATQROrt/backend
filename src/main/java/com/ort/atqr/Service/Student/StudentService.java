@@ -1,5 +1,6 @@
 package com.ort.atqr.Service.Student;
 
+import com.ort.atqr.Model.Professor;
 import com.ort.atqr.Model.Student;
 
 import java.util.List;
@@ -18,5 +19,4 @@ public interface StudentService {
     void deleteStudent(Long id);
 
     Optional<List<Student>> getAll();
-
 }

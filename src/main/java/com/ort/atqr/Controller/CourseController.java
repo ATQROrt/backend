@@ -52,6 +52,12 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping(value = "/{id}/professor")
+    public ResponseEntity<Course> assignStudent(@PathVariable Long id, @RequestBody Professor professor){
+        courseService.assignProfessor(id, professor);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping(value = "/{id}/class")
     public ResponseEntity<ClassDay> createClass(@PathVariable Long id){
         classDayService.create(id);
