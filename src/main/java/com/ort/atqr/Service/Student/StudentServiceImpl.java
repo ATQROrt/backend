@@ -1,11 +1,11 @@
 package com.ort.atqr.Service.Student;
 
 import com.ort.atqr.Exception.InvalidInputException;
-import com.ort.atqr.Model.Asignature;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Repository.StudentRepository;
 import com.ort.atqr.Service.AttributeHelper;
+import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +16,13 @@ import java.util.Optional;
 @Service
 public class StudentServiceImpl implements StudentService{
 
-    private StudentRepository studentRepository;
+    private final StudentRepository studentRepository;
+    private final CourseService courseService;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, CourseService courseService) {
         this.studentRepository = studentRepository;
+        this.courseService = courseService;
     }
 
     public Optional<Student> login(Student student) {
@@ -70,5 +72,16 @@ public class StudentServiceImpl implements StudentService{
 
     public Optional<List<Student>> getAll() {
         return Optional.ofNullable((List<Student>) studentRepository.findAll());
+    }
+
+    public List<Course> getCourses(Long id) {
+        List<Course> courses = new ArrayList<>();
+        List<Course> coursesIds = studentRepository.getCourses(id);
+
+        for(Course c : coursesIds){
+            courses.add(courseService.getById(c.getId()));
+        }
+
+        return courses;
     }
 }
