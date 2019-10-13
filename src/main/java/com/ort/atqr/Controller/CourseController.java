@@ -52,16 +52,27 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping(value = "/{id}/class")
-    public ResponseEntity<ClassDay> createClass(@PathVariable Long id){
-        classDayService.create(id);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    @PostMapping(value = "/{id}/professor")
+    public ResponseEntity<Course> assignProfessor(@PathVariable Long id, @RequestBody Professor professor){
+        courseService.assignProfessor(id, professor);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping(value = "/{id}/class")
+    public ResponseEntity<ClassDay> createClass(@PathVariable Professor professor){
+        classDayService.create(professor.getId());
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 
     @PostMapping(value = "/student")
     public ResponseEntity<List<Course>> getCourses(@RequestBody Student student){
         List<Course> courses = courseService.getCourses(student.getId());
+        return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/professor")
+    public ResponseEntity<List<Course>> getProfessorCourses(@RequestBody Professor professor){
+        List<Course> courses = courseService.getProfessorCourses(professor.getId());
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 }

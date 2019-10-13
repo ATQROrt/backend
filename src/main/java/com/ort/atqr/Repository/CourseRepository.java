@@ -1,9 +1,6 @@
 package com.ort.atqr.Repository;
 
-import com.ort.atqr.Model.Assistance;
-import com.ort.atqr.Model.AssistanceStatus;
-import com.ort.atqr.Model.Course;
-import com.ort.atqr.Model.Student;
+import com.ort.atqr.Model.*;
 import org.postgresql.core.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,7 +14,8 @@ public interface CourseRepository extends CrudRepository<Course, Long>{
     @Query(value = "SELECT course_id FROM student_course_intermediate WHERE student_id = ?1", nativeQuery = true)
     List<Long> getStudentCoursesById(Long id);
 
-    //@Query(nativeQuery = true, value = "SELECT assistanceStatus from ")
-    //public List<AssistanceStatus> findAssistanceStatusByStudent(Student student);
+    @Transactional
+    @Query(value = "SELECT id FROM course WHERE professor_id = ?1", nativeQuery = true)
+    List<Long> getProfessorCourses(Long id);
 
 }

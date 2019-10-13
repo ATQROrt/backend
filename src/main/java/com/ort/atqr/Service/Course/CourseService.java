@@ -2,13 +2,14 @@ package com.ort.atqr.Service.Course;
 
 import com.ort.atqr.Exception.InvalidInputException;
 import com.ort.atqr.Model.Course;
+import com.ort.atqr.Model.Professor;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Repository.CourseRepository;
+import com.ort.atqr.Service.Professor.ProfessorService;
 import com.ort.atqr.Service.Student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,11 +19,13 @@ public class CourseService {
 
     private final CourseRepository courseRepository;
     private final StudentService studentService;
+    private final ProfessorService professorService;
 
     @Autowired
-    public CourseService(CourseRepository courseRepository, StudentService studentService) {
+    public CourseService(CourseRepository courseRepository, StudentService studentService, ProfessorService professorService) {
         this.courseRepository = courseRepository;
         this.studentService = studentService;
+        this.professorService = professorService;
     }
 
     public Course create(Course course) {
@@ -64,6 +67,25 @@ public class CourseService {
         return courses;
     }
 
+    public void assignProfessor(Long id, Professor professor) {
+        Course course = getById(id);
+        if(course != null){
+            Professor prof = professorService.getProfessorById(professor.getId());
+            course.setProfessor(prof);
+            courseRepository.save(course);
+        }
+    }
+
+    public List<Course> getProfessorCourses(Long id) {
+        List<Course> courses = new ArrayList<>();
+        List<Long> coursesIds = courseRepository.getProfessorCourses(id);
+
+        for(Long courseId : coursesIds){
+            courses.add(getById(courseId));
+        }
+
+        return courses;
+    }
 
     /*
     public Integer assistancePercentage(Student student, Long id){
