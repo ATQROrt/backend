@@ -3,6 +3,7 @@ package com.ort.atqr.Controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ort.atqr.Model.Asignature;
 import com.ort.atqr.Model.Course;
+import com.ort.atqr.Model.Professor;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/course")

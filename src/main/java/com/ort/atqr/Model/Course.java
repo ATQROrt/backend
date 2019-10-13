@@ -17,7 +17,7 @@ public class Course implements Validatable {
     private Professor professor;
     @OneToMany(targetEntity = ClassDay.class, fetch = FetchType.LAZY)
     private List<ClassDay> classDayList;
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }  )
     @JoinTable(
             name = "Student_Course_Intermediate",
             joinColumns = { @JoinColumn(name = "course_id") },
@@ -30,6 +30,10 @@ public class Course implements Validatable {
         if (this.asignature == null) {
             throw new InvalidInputException(ErrorMessage.INVALID_ASSIGNATURE);
         }
+    }
+
+    public void addStudent(Student student){
+        this.students.add(student);
     }
 
     public Asignature getAsignature() {

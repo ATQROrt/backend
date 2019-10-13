@@ -1,15 +1,13 @@
 package com.ort.atqr.Service.Course;
 
 import com.ort.atqr.Exception.InvalidInputException;
-import com.ort.atqr.Model.AssistanceStatus;
-import com.ort.atqr.Model.ClassDay;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Repository.CourseRepository;
+import com.ort.atqr.Service.Student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +15,12 @@ import java.util.Optional;
 public class CourseService {
 
     private final CourseRepository courseRepository;
+    private final StudentService studentService;
 
     @Autowired
-    public CourseService(CourseRepository courseRepository) {
+    public CourseService(CourseRepository courseRepository, StudentService studentService) {
         this.courseRepository = courseRepository;
+        this.studentService = studentService;
     }
 
     public Course create(Course course) {
@@ -44,7 +44,8 @@ public class CourseService {
     public void assignStudent(Long id, Student student) {
         Course course = getById(id);
         if(course != null){
-            course.getStudents().add(student);
+            Student std = studentService.getStudentById(student.getId());
+            course.addStudent(std);
             courseRepository.save(course);
         }
     }

@@ -1,6 +1,7 @@
 package com.ort.atqr.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,5 +15,4 @@ public class Student extends User {
 
     public Student() {
     }
-
 }
