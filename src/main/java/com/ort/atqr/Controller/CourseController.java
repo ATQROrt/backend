@@ -58,4 +58,10 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+
+    @PostMapping(value = "/student")
+    public ResponseEntity<List<Course>> getCourses(@RequestBody Student student){
+        List<Course> courses = courseService.getCourses(student.getId());
+        return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
 }

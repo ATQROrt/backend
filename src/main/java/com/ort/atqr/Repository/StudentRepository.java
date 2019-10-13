@@ -16,10 +16,5 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
     @Modifying
     @Query(value = "DELETE FROM Student_Course_Intermediate WHERE STUDENT_ID = ?1", nativeQuery = true)
     void deleteStudentFromCourses(Long id);
-
-    @Transactional
-    @Query(value = "SELECT course_id FROM student_course_intermediate WHERE student_id = ?1", nativeQuery = true)
-    List<Course> getCourses(Long id);
-
 }
 

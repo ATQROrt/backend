@@ -17,12 +17,10 @@ import java.util.Optional;
 public class StudentServiceImpl implements StudentService{
 
     private final StudentRepository studentRepository;
-    private final CourseService courseService;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, CourseService courseService) {
+    public StudentServiceImpl(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-        this.courseService = courseService;
     }
 
     public Optional<Student> login(Student student) {
@@ -74,14 +72,4 @@ public class StudentServiceImpl implements StudentService{
         return Optional.ofNullable((List<Student>) studentRepository.findAll());
     }
 
-    public List<Course> getCourses(Long id) {
-        List<Course> courses = new ArrayList<>();
-        List<Course> coursesIds = studentRepository.getCourses(id);
-
-        for(Course c : coursesIds){
-            courses.add(courseService.getById(c.getId()));
-        }
-
-        return courses;
-    }
 }

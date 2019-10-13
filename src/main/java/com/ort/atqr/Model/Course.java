@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 public class Course implements Validatable {
     @Id
+    @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToOne(cascade = CascadeType.REFRESH)
