@@ -1,9 +1,8 @@
 package com.ort.atqr.Service.Course;
 
 import com.ort.atqr.Exception.InvalidInputException;
-import com.ort.atqr.Model.Course;
-import com.ort.atqr.Model.Professor;
-import com.ort.atqr.Model.Student;
+import com.ort.atqr.Model.*;
+import com.ort.atqr.Repository.AssistanceRepository;
 import com.ort.atqr.Repository.CourseRepository;
 import com.ort.atqr.Service.Professor.ProfessorService;
 import com.ort.atqr.Service.Student.StudentService;
@@ -20,12 +19,14 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final StudentService studentService;
     private final ProfessorService professorService;
+    private final AssistanceRepository assistanceRepository;
 
     @Autowired
-    public CourseService(CourseRepository courseRepository, StudentService studentService, ProfessorService professorService) {
+    public CourseService(CourseRepository courseRepository, StudentService studentService, ProfessorService professorService, AssistanceRepository assistanceRepository) {
         this.courseRepository = courseRepository;
         this.studentService = studentService;
         this.professorService = professorService;
+        this.assistanceRepository = assistanceRepository;
     }
 
     public Course create(Course course) {
@@ -85,6 +86,17 @@ public class CourseService {
         }
 
         return courses;
+    }
+
+    public void studentAssistance(StudentCourse studentCourse) {
+        Course course = getById(studentCourse.getCourseId());
+        ClassDay classDay = course.getClassDayList().get(course.getClassDayList().size() - 1);
+        Assistance assistance = new Assistance();
+        assistance.setStudent(studentService.getStudentById(studentCourse.getStudentId()));
+        assistance.setAssistanceStatus(AssistanceStatus.PRESENT);
+        classDay.addAssistance(assistance);
+        assistanceRepository.save(assistance);
+        courseRepository.save(course);
     }
 
     /*
