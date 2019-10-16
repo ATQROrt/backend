@@ -27,6 +27,14 @@ public class Assistance {
     public void setAssistanceStatus(AssistanceStatus assistanceStatus) {
         this.assistanceStatus = assistanceStatus;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
 
 //a medida que van escaneando el qr, se va agregando un nuevo registro asistencia con status present.

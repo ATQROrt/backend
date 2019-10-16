@@ -59,9 +59,9 @@ public class CourseController {
     }
 
     @PostMapping(value = "/{id}/class")
-    public ResponseEntity<ClassDay> createClass(@PathVariable Professor professor){
-        classDayService.create(professor.getId());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<ClassDay> createClass(@PathVariable Long id){
+        ClassDay classDay = classDayService.create(id);
+        return new ResponseEntity<>(classDay, HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/student")
@@ -74,5 +74,11 @@ public class CourseController {
     public ResponseEntity<List<Course>> getProfessorCourses(@RequestBody Professor professor){
         List<Course> courses = courseService.getProfessorCourses(professor.getId());
         return new ResponseEntity<>(courses, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/assistance")
+    public ResponseEntity<Void> studentAssistance(@RequestBody StudentCourse studentCourse){
+        courseService.studentAssistance(studentCourse);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

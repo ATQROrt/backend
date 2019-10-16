@@ -24,6 +24,10 @@ public class ClassDay{
         this.cancelled = false;
     }
 
+    public void addAssistance(Assistance assistance){
+        assistanceList.add(assistance);
+    }
+
     public Long getId() {
         return id;
     }
