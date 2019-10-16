@@ -99,6 +99,17 @@ public class CourseService {
         courseRepository.save(course);
     }
 
+    public List<Student> grabAllPresentStudents(Long courseId){
+        Course course = getById(courseId);
+        ClassDay classDay = course.getClassDayList().get(course.getClassDayList().size() - 1);
+
+        List<Student> students = new ArrayList<>();
+        for (Long id : assistanceRepository.grabAllStudentIds(classDay.getId())){
+            students.add(studentService.getStudentById(id));
+        }
+        return students;
+    }
+
     /*
     public Integer assistancePercentage(Student student, Long id){
         Course course = getById(id);

@@ -81,4 +81,9 @@ public class CourseController {
         courseService.studentAssistance(studentCourse);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping(value = "/{id}/present")
+    public ResponseEntity<List<Student>> grabAllPresentStudents(@PathVariable Long id){
+        return new ResponseEntity<>(courseService.grabAllPresentStudents(id), HttpStatus.OK);
+    }
 }
