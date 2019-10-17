@@ -56,15 +56,16 @@ public class CourseService {
         }
     }
 
+    public List<CoursePercentage> getStudentCoursesWithPercentage(Long studentId){
+        List<CoursePercentage> courses = new ArrayList<>();
 
-    public List<Course> getCourses(Long id) {
-        List<Course> courses = new ArrayList<>();
-        List<Long> coursesIds = courseRepository.getStudentCoursesById(id);
+        List<Long> coursesIds = courseRepository.getStudentCoursesById(studentId);
 
         for(Long courseId : coursesIds){
-            courses.add(getById(courseId));
+            StudentCourse studentCourse = new StudentCourse(studentId, courseId);
+            CoursePercentage coursePercentage = new CoursePercentage(getById(courseId), studentHistoryPercentage(studentCourse));
+            courses.add(coursePercentage);
         }
-
         return courses;
     }
 
@@ -142,22 +143,4 @@ public class CourseService {
         return history;
     }
 
-    /*
-    public Integer assistancePercentage(Student student, Long id){
-        Course course = getById(id);
-
-        if(course.getClassDayList().isEmpty()){
-            throw new IllegalArgumentException("The classday list can't be empty. ");
-        }
-
-        int presentClassDays = 0;
-        for(ClassDay classDay : course.getClassDayList()){
-            classDay.getAssistanceList().findAssistanceStatusByStudent(student)
-        }
-            if(classDayList.get(i).getAssistanceList(). == AssistanceStatus.PRESENT){
-                presentClassDays++;
-        }
-        return (allClassDays*presentClassDays)/100;
-    }
-*/
 }

@@ -20,4 +20,9 @@ public class StudentCourse {
     public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
+
+    public StudentCourse(Long studentId, Long courseId) {
+        this.studentId = studentId;
+        this.courseId = courseId;
+    }
 }

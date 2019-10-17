@@ -65,8 +65,8 @@ public class CourseController {
     }
 
     @PostMapping(value = "/student")
-    public ResponseEntity<List<Course>> getCourses(@RequestBody Student student){
-        List<Course> courses = courseService.getCourses(student.getId());
+    public ResponseEntity<List<CoursePercentage>> getCourses(@RequestBody Student student){
+        List<CoursePercentage> courses = courseService.getStudentCoursesWithPercentage(student.getId());
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
 
