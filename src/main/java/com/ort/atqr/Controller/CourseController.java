@@ -86,4 +86,14 @@ public class CourseController {
     public ResponseEntity<List<Student>> grabAllPresentStudents(@PathVariable Long id){
         return new ResponseEntity<>(courseService.grabAllPresentStudents(id), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/history")
+    public ResponseEntity<List<DateAssistance>> getStudentHistory(@RequestBody StudentCourse studentCourse){
+        return new ResponseEntity<>(courseService.getStudentHistory(studentCourse), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/percentage")
+    public ResponseEntity<Integer> getAssistancePercentage(@RequestBody StudentCourse studentCourse){
+        return new ResponseEntity<>(courseService.studentHistoryPercentage(studentCourse), HttpStatus.OK);
+    }
 }

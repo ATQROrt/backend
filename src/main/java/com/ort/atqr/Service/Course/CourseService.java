@@ -110,6 +110,38 @@ public class CourseService {
         return students;
     }
 
+    public Integer studentHistoryPercentage(StudentCourse studentCourse){
+        List<DateAssistance> history = getStudentHistory(studentCourse);
+        if(history.size() < 1){
+            return 0;
+        }
+
+        int presentCounter = 0;
+
+        for(DateAssistance dateAssistance : history){
+            if(dateAssistance.getAssistanceStatus() == AssistanceStatus.PRESENT){
+                presentCounter++;
+            }
+        }
+
+        return presentCounter*100/history.size();
+    }
+
+    public List<DateAssistance> getStudentHistory(StudentCourse studentCourse){
+        List<DateAssistance> history = new ArrayList<>();
+        Course course = getById(studentCourse.getCourseId());
+
+        for(ClassDay classDay : course.getClassDayList()){
+            for(Assistance assistance : classDay.getAssistanceList()){
+                if(assistance.getStudent().getId().equals(studentCourse.getStudentId())){
+                    history.add(new DateAssistance(classDay.getDate(), assistance.getAssistanceStatus(), classDay.getCancelled()));
+                }
+            }
+        }
+
+        return history;
+    }
+
     /*
     public Integer assistancePercentage(Student student, Long id){
         Course course = getById(id);
