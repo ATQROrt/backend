@@ -21,6 +21,10 @@ public class StudentCourse {
         this.courseId = courseId;
     }
 
+    public StudentCourse(){
+
+    }
+
     public StudentCourse(Long studentId, Long courseId) {
         this.studentId = studentId;
         this.courseId = courseId;
