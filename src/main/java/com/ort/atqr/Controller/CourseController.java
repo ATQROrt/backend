@@ -96,4 +96,10 @@ public class CourseController {
     public ResponseEntity<Integer> getAssistancePercentage(@RequestBody StudentCourse studentCourse){
         return new ResponseEntity<>(courseService.studentHistoryPercentage(studentCourse), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/{id}/endclass")
+    public ResponseEntity<List<Assistance>> endClass(@PathVariable Long id){
+        List<Assistance> assistances = classDayService.endClass(id);
+        return new ResponseEntity<List<Assistance>>(assistances, HttpStatus.CREATED);
+    }
 }

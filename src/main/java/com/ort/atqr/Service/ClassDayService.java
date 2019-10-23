@@ -1,11 +1,16 @@
 package com.ort.atqr.Service;
 
+import com.ort.atqr.Model.Assistance;
 import com.ort.atqr.Model.ClassDay;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Repository.ClassDayRepository;
 import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClassDayService {
@@ -26,4 +31,11 @@ public class ClassDayService {
         return classDayRepository.save(classDay);
     }
 
+    public List<Assistance> endClass(Long id) {
+        Optional<ClassDay> classDay = classDayRepository.findById(id);
+        if(classDay.isPresent()){
+            return classDay.get().getAssistanceList();
+        }
+        return new ArrayList<>();
+    }
 }
