@@ -113,7 +113,7 @@ public class CourseService {
 
     public Integer studentHistoryPercentage(StudentCourse studentCourse){
         List<DateAssistance> history = getStudentHistory(studentCourse);
-        if(history.size() < 1){
+        if(history.isEmpty()){
             return 0;
         }
 
@@ -134,8 +134,13 @@ public class CourseService {
 
         for(ClassDay classDay : course.getClassDayList()){
             for(Assistance assistance : classDay.getAssistanceList()){
-                if(assistance.getStudent().getId().equals(studentCourse.getStudentId())){
-                    history.add(new DateAssistance(classDay.getDate(), assistance.getAssistanceStatus(), classDay.getCancelled()));
+                //TODO Remover el TRY CATCH, dejar solo lo de adentro.
+                try{
+                    if(assistance.getStudent().getId().equals(studentCourse.getStudentId())){
+                        history.add(new DateAssistance(classDay.getDate(), assistance.getAssistanceStatus(), classDay.getCancelled()));
+                    }
+                } catch (Exception e){
+
                 }
             }
         }

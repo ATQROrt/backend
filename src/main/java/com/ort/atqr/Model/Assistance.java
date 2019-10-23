@@ -10,6 +10,7 @@ public class Assistance {
     @OneToOne
     private Student student;
     @Enumerated
+    @Column(columnDefinition = "int default 1")
     private AssistanceStatus assistanceStatus;
 
     public Student getStudent() {

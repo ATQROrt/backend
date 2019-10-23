@@ -52,7 +52,7 @@ public class StudentController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
         Student studentFinded = studentServiceImpl.getStudentById(id);
-        return new ResponseEntity<>(studentFinded, HttpStatus.FOUND);
+        return new ResponseEntity<>(studentFinded, HttpStatus.OK);
     }
 
     @GetMapping
@@ -60,18 +60,4 @@ public class StudentController {
         Optional<List<Student>> students = studentServiceImpl.getAll();
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
-
-    /*
-    @GetMapping
-    public ResponseEntity<List<Asignature>> getAllStudentAsignatures(@PathVariable Long id){
-        List<Asignature> asignatures = studentServiceImpl.getStudentAsignatures(id);
-        return new ResponseEntity<>(asignatures, HttpStatus.FOUND);
-    }
-    */
-
-/*
-    @GetMapping
-    public ResponseEntity<List<Assistance>>
-    */
-    //me parece que en assistance hay una clase de por medio al pedo, con course podemos tener direcatmente assitance y de ahi el status y la fecha, para que tiene un id asistencia?
 }

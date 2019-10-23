@@ -1,6 +1,5 @@
 package com.ort.atqr.Service;
 
-import com.ort.atqr.Exception.InvalidInputException;
 import com.ort.atqr.Model.ClassDay;
 import com.ort.atqr.Model.Course;
 import com.ort.atqr.Repository.ClassDayRepository;
