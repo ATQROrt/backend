@@ -30,6 +30,7 @@ public class ClassDayService {
             Assistance assistance = new Assistance();
             assistance.setStudent(student);
             assistance.setAssistanceStatus(AssistanceStatus.ABSENT);
+            assistances.add(assistance);
         }
         classDay.setAssistanceList(assistances);
         course.addClass(classDay);
