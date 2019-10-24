@@ -1,8 +1,6 @@
 package com.ort.atqr.Service;
 
-import com.ort.atqr.Model.Assistance;
-import com.ort.atqr.Model.ClassDay;
-import com.ort.atqr.Model.Course;
+import com.ort.atqr.Model.*;
 import com.ort.atqr.Repository.ClassDayRepository;
 import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,13 @@ public class ClassDayService {
     public ClassDay create(Long courseId){
         Course course = courseService.getById(courseId);
         ClassDay classDay = new ClassDay();
+        List<Assistance> assistances = new ArrayList<>();
+        for(Student student : course.getStudents()){
+            Assistance assistance = new Assistance();
+            assistance.setStudent(student);
+            assistance.setAssistanceStatus(AssistanceStatus.ABSENT);
+        }
+        classDay.setAssistanceList(assistances);
         course.addClass(classDay);
         return classDayRepository.save(classDay);
     }

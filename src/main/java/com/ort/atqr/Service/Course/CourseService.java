@@ -147,5 +147,4 @@ public class CourseService {
 
         return history;
     }
-
 }
