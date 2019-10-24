@@ -1,6 +1,7 @@
 package com.ort.atqr.Service;
 
 import com.ort.atqr.Model.*;
+import com.ort.atqr.Repository.AssistanceRepository;
 import com.ort.atqr.Repository.ClassDayRepository;
 import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,13 @@ public class ClassDayService {
 
     private final ClassDayRepository classDayRepository;
     private final CourseService courseService;
+    private final AssistanceRepository assistanceRepository;
 
     @Autowired
-    public ClassDayService(ClassDayRepository classDayRepository, CourseService courseService) {
+    public ClassDayService(ClassDayRepository classDayRepository, CourseService courseService, AssistanceRepository assistanceRepository) {
         this.classDayRepository = classDayRepository;
         this.courseService = courseService;
+        this.assistanceRepository = assistanceRepository;
     }
 
     public ClassDay create(Long courseId){
@@ -30,6 +33,7 @@ public class ClassDayService {
             Assistance assistance = new Assistance();
             assistance.setStudent(student);
             assistance.setAssistanceStatus(AssistanceStatus.ABSENT);
+            assistanceRepository.save(assistance);
             assistances.add(assistance);
         }
         classDay.setAssistanceList(assistances);
