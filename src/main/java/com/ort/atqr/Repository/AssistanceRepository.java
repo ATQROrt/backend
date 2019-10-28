@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface AssistanceRepository extends CrudRepository<Assistance, Long> {
-    @Query(value = "SELECT student_id FROM class_day_assistance_list middle join assistance a on middle.assistance_list_id = a.id where middle.class_day_id = ?1", nativeQuery = true)
+    @Query(value = "SELECT student_id FROM class_day_assistance_list middle join assistance a on middle.assistance_list_id = a.id where assistance_status = 0 AND middle.class_day_id = ?1", nativeQuery = true)
     List<Long> grabAllStudentIds(Long classDayId);
 }
