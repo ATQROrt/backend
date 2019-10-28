@@ -93,12 +93,24 @@ public class CourseService {
         Course course = getById(studentCourse.getCourseId());
         ClassDay classDay = course.getClassDayList().get(course.getClassDayList().size() - 1);
 
-        Assistance assistance = new Assistance();
-        assistance.setStudent(studentService.getStudentById(studentCourse.getStudentId()));
+        Assistance assistance = getStudentAssistance(classDay.getAssistanceList(), studentCourse.getStudentId());
+        if(assistance == null){
+            assistance = new Assistance();
+            assistance.setStudent(studentService.getStudentById(studentCourse.getStudentId()));
+            classDay.addAssistance(assistance);
+        }
         assistance.setAssistanceStatus(AssistanceStatus.PRESENT);
-        classDay.addAssistance(assistance);
         assistanceRepository.save(assistance);
         courseRepository.save(course);
+    }
+
+    private Assistance getStudentAssistance(List<Assistance> assistances, Long id){
+        for(Assistance assistance : assistances){
+            if(assistance.getStudent().getId().equals(id)){
+                return assistance;
+            }
+        }
+        return null;
     }
 
     public List<Student> grabAllPresentStudents(Long courseId){
