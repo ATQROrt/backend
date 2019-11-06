@@ -42,17 +42,6 @@ public class StudentServiceImpl implements StudentService{
         return studentRepository.findById(id).orElse(null);
     }
 
-    /*
-    public List<Asignature> getStudentAsignatures(Long id){
-        Student student = getStudentById(id);
-        List<Asignature> asignatures = new ArrayList<Asignature>();
-        for(int i = 0; i<student.getStudentCourses().size(); i++){
-            asignatures.add(student.getStudentCourses().get(i).getAsignature());
-        }
-        return asignatures;
-    }
-    */
-
     public Student createNewStudent(Student student) {
         try {
             student.validate();

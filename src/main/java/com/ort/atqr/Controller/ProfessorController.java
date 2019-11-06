@@ -44,9 +44,9 @@ public class ProfessorController {
         return new ResponseEntity<>(newProfessor, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Professor> deleteProfessor(@RequestBody Professor professor) {
-        professorServiceImpl.deleteProfessor(professor.getId());
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Professor> deleteProfessor(@PathVariable Long id) {
+        professorServiceImpl.deleteProfessor(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

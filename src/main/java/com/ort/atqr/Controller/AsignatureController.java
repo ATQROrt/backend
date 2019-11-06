@@ -26,10 +26,10 @@ public class AsignatureController {
         return new ResponseEntity<Asignature>(newAsignature, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<Asignature> deleteAsignature(@RequestBody Asignature asignature){
-        asignatureServiceImpl.deleteAsignature(asignature.getCode());
-        return new ResponseEntity<Asignature>(asignature, HttpStatus.NO_CONTENT);
+    @DeleteMapping("/{code}")
+    public ResponseEntity<Asignature> deleteAsignature(@PathVariable String code){
+        asignatureServiceImpl.deleteAsignature(code);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
