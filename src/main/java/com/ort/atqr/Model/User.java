@@ -2,6 +2,7 @@ package com.ort.atqr.Model;
 
 import com.ort.atqr.Exception.ErrorMessage;
 import com.ort.atqr.Exception.InvalidInputException;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,8 +23,10 @@ public abstract class User implements Validatable {
     private String imageUrl;
     private String password;
     private Date createdAt;
+    @Column(name = "IS_ADMIN", columnDefinition = "boolean default false", nullable = false)
+    private Boolean isAdmin = false;
 
-    public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password) {
+    public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password, Boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
@@ -31,6 +34,7 @@ public abstract class User implements Validatable {
         this.birth = birth;
         this.imageUrl = imageUrl;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public User() {
@@ -135,4 +139,6 @@ public abstract class User implements Validatable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Boolean getIsAdmin(){ return isAdmin; }
 }

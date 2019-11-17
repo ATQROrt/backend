@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/asignature")
 public class AsignatureController {
@@ -23,7 +25,12 @@ public class AsignatureController {
     @PostMapping
     public ResponseEntity<Asignature> createAsignature(@RequestBody Asignature asignature){
         Asignature newAsignature = asignatureServiceImpl.createNewAsignature(asignature);
-        return new ResponseEntity<Asignature>(newAsignature, HttpStatus.CREATED);
+        return new ResponseEntity<>(newAsignature, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Asignature>> getAll(){
+        return new ResponseEntity<>(asignatureServiceImpl.getAll(), HttpStatus.OK);
     }
 
     @DeleteMapping("/{code}")

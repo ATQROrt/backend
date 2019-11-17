@@ -31,9 +31,10 @@ public class ProfessorController {
         return new ResponseEntity<>(logged, HttpStatus.OK);
     }
 
-    @PatchMapping
-    public ResponseEntity<Optional<Professor>> updateProfessor(@RequestBody Map<String, Object> update) {
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Optional<Professor>> updateProfessor(@PathVariable Long id, @RequestBody Map<String, Object> update) {
         Professor modified = objectMapper.convertValue(update, Professor.class);
+        modified.setId(id);
         Optional<Professor> newProfessor = professorServiceImpl.updateProfessor(modified);
         return new ResponseEntity<>(newProfessor, HttpStatus.OK);
     }
