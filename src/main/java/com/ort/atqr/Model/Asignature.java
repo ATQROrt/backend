@@ -3,12 +3,14 @@ package com.ort.atqr.Model;
 import com.ort.atqr.Exception.ErrorMessage;
 import com.ort.atqr.Exception.InvalidInputException;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class Asignature implements Validatable {
     @Id
+    @Column(unique = true)
     private String code;
     private String name;
 
