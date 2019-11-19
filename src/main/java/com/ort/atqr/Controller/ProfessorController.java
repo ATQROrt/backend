@@ -58,8 +58,8 @@ public class ProfessorController {
     }
 
     @GetMapping
-    public ResponseEntity<Optional<List<Professor>>> getAllStudents() {
-        Optional<List<Professor>> professors = professorServiceImpl.getAll();
+    public ResponseEntity<List<Professor>> getAllStudents() {
+        List<Professor> professors = professorServiceImpl.getAll();
         return new ResponseEntity<>(professors, HttpStatus.OK);
     }
 }

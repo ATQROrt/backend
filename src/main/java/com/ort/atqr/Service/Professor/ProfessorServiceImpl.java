@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService{
@@ -53,7 +54,7 @@ public class ProfessorServiceImpl implements ProfessorService{
         professorRepository.deleteById(id);
     }
 
-    public Optional<List<Professor>> getAll() {
-        return Optional.ofNullable((List<Professor>) professorRepository.findAll());
+    public List<Professor> getAll() {
+        return ((List<Professor>) professorRepository.findAll()).stream().filter(x -> !x.getIsAdmin()).collect(Collectors.toList());
     }
 }

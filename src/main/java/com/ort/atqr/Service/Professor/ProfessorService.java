@@ -15,5 +15,5 @@ public interface ProfessorService {
 
     void deleteProfessor(Long id);
 
-    Optional<List<Professor>> getAll();
+    List<Professor> getAll();
 }
