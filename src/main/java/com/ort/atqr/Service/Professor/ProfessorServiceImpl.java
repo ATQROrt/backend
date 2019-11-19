@@ -43,6 +43,8 @@ public class ProfessorServiceImpl implements ProfessorService{
     public Professor createNewProfessor(Professor professor) {
         try {
             professor.validate();
+            professorRepository.findProfessorByDocumentOrMail(professor.getDocument(), professor.getMail()).ifPresent(x ->
+            {throw new IllegalArgumentException("Ya existe un profesor con este mail o documento");});
             return professorRepository.save(professor);
         } catch (InvalidInputException e) {
             e.printStackTrace();

@@ -45,6 +45,8 @@ public class StudentServiceImpl implements StudentService{
     public Student createNewStudent(Student student) {
         try {
             student.validate();
+            studentRepository.findStudentByDocumentOrMail(student.getDocument(), student.getMail()).ifPresent(x ->
+            {throw new IllegalArgumentException("Ya existe un alumno con este mail o documento");});
             return studentRepository.save(student);
         } catch (InvalidInputException e) {
             e.printStackTrace();
