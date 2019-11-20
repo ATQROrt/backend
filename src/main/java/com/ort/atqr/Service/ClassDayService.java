@@ -4,10 +4,12 @@ import com.ort.atqr.Model.*;
 import com.ort.atqr.Repository.AssistanceRepository;
 import com.ort.atqr.Repository.ClassDayRepository;
 import com.ort.atqr.Service.Course.CourseService;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,9 +27,32 @@ public class ClassDayService {
         this.assistanceRepository = assistanceRepository;
     }
 
-    public ClassDay create(Long courseId){
+    private boolean isSameDate(Optional<ClassDay> lastClass, ClassDay classDay){
+        if(!lastClass.isPresent()) return false;
+
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+        cal1.setTime(lastClass.get().getDate());
+        cal2.setTime(classDay.getDate());
+        return cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
+                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+    }
+
+    private Optional<ClassDay> getLastClass(Course course){
+        if(course.getClassDayList().isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of(course.getClassDayList().get(course.getClassDayList().size() - 1));
+    }
+
+    public ClassDay create(Long courseId) throws InvalidArgumentException{
         Course course = courseService.getById(courseId);
         ClassDay classDay = new ClassDay();
+        Optional<ClassDay> lastClass = getLastClass(course);
+        if(isSameDate(lastClass, classDay)){
+            throw new InvalidArgumentException(new String[]{"Ya se abrio una clase hoy."});
+        }
+
         List<Assistance> assistances = new ArrayList<>();
         for(Student student : course.getStudents()){
             Assistance assistance = new Assistance();
