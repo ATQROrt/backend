@@ -45,12 +45,12 @@ public class ClassDayService {
         return Optional.of(course.getClassDayList().get(course.getClassDayList().size() - 1));
     }
 
-    public ClassDay create(Long courseId) throws InvalidArgumentException{
+    public ClassDay create(Long courseId) {
         Course course = courseService.getById(courseId);
         ClassDay classDay = new ClassDay();
         Optional<ClassDay> lastClass = getLastClass(course);
         if(isSameDate(lastClass, classDay)){
-            throw new InvalidArgumentException(new String[]{"Ya se abrio una clase hoy."});
+            throw new IllegalArgumentException("Ya se abrio una clase hoy.");
         }
 
         List<Assistance> assistances = new ArrayList<>();

@@ -50,7 +50,7 @@ public class StudentServiceImpl implements StudentService{
             return studentRepository.save(student);
         } catch (InvalidInputException e) {
             e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
