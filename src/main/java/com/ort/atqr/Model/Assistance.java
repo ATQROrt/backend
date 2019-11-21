@@ -13,6 +13,13 @@ public class Assistance {
     @Column(columnDefinition = "int default 1")
     private AssistanceStatus assistanceStatus;
 
+    public Assistance() { }
+
+    public Assistance(Student student, AssistanceStatus assistanceStatus){
+        this.student = student;
+        this.assistanceStatus = assistanceStatus;
+    }
+
     public Student getStudent() {
         return student;
     }

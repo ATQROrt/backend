@@ -51,6 +51,11 @@ public class CourseService {
         Course course = getById(id);
         if(course != null){
             Student std = studentService.getStudentById(student.getId());
+            for(ClassDay classDay : course.getClassDayList()){
+                Assistance assistance = new Assistance(std, AssistanceStatus.ABSENT);
+                classDay.addAssistance(assistance);
+                assistanceRepository.save(assistance);
+            }
             course.addStudent(std);
             courseRepository.save(course);
         }
