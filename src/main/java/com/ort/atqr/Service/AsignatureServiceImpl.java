@@ -22,10 +22,13 @@ public class AsignatureServiceImpl {
     public Asignature createNewAsignature(Asignature asignature){
         try{
             asignature.validate();
-            return asignatureRepository.save(asignature);
+            Asignature asignature1 = asignatureRepository.findAsignatureByCode(asignature.getCode());
+            if(asignature1 != null)
+                return asignatureRepository.save(asignature);
+            throw new IllegalArgumentException("Ya existe una asignatura con ese codigo");
         } catch(InvalidInputException e){
             e.printStackTrace();
-            return null;
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
