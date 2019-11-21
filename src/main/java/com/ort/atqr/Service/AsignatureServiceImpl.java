@@ -23,7 +23,7 @@ public class AsignatureServiceImpl {
         try{
             asignature.validate();
             Asignature asignature1 = asignatureRepository.findAsignatureByCode(asignature.getCode());
-            if(asignature1 != null)
+            if(asignature1 == null)
                 return asignatureRepository.save(asignature);
             throw new IllegalArgumentException("Ya existe una asignatura con ese codigo");
         } catch(InvalidInputException e){
