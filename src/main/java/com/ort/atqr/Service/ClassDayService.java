@@ -4,7 +4,6 @@ import com.ort.atqr.Model.*;
 import com.ort.atqr.Repository.AssistanceRepository;
 import com.ort.atqr.Repository.ClassDayRepository;
 import com.ort.atqr.Service.Course.CourseService;
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
