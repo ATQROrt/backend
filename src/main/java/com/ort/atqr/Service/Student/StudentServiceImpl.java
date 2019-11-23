@@ -2,6 +2,7 @@ package com.ort.atqr.Service.Student;
 
 import com.ort.atqr.Exception.InvalidInputException;
 import com.ort.atqr.Model.Course;
+import com.ort.atqr.Model.Professor;
 import com.ort.atqr.Model.Student;
 import com.ort.atqr.Repository.StudentRepository;
 import com.ort.atqr.Service.AttributeHelper;
@@ -27,10 +28,20 @@ public class StudentServiceImpl implements StudentService{
         return Optional.ofNullable(studentRepository.findStudentByDocumentAndPassword(student.getDocument(), student.getPassword()));
     }
 
+    private void validate(Student student){
+        try{
+            student.validate();
+        } catch(InvalidInputException e){
+            e.printStackTrace();
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
     public Optional<Student> updateStudent(Student student) {
         Student std = studentRepository.findById(student.getId()).orElse(null);
         if (std != null) {
             AttributeHelper.myCopyProperties(student, std);
+            validate(std);
             studentRepository.save(std);
             return Optional.of(std);
         } else {
@@ -43,15 +54,10 @@ public class StudentServiceImpl implements StudentService{
     }
 
     public Student createNewStudent(Student student) {
-        try {
-            student.validate();
-            studentRepository.findStudentByDocumentOrMail(student.getDocument(), student.getMail()).ifPresent(x ->
-            {throw new IllegalArgumentException("Ya existe un alumno con este mail o documento");});
-            return studentRepository.save(student);
-        } catch (InvalidInputException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException(e.getMessage());
-        }
+        validate(student);
+        studentRepository.findStudentByDocumentOrMail(student.getDocument(), student.getMail()).ifPresent(x ->
+        {throw new IllegalArgumentException("Ya existe un alumno con este mail o documento");});
+        return studentRepository.save(student);
     }
 
     public void deleteStudent(Long id) {
