@@ -44,10 +44,9 @@ public class ProfessorServiceImpl implements ProfessorService{
     private void validate(Professor professor){
         try{
             professor.validate();
-            Optional<Professor> existing = professorRepository.findProfessorByDocumentOrMail(professor.getDocument(), professor.getMail());
-            existing.ifPresent(x-> {
-                if(!x.getId().equals(professor.getId())) throw new IllegalArgumentException("Ya existe un profesor con este mail o documento");
-            });
+            List<Professor> existing = professorRepository.findProfessorByDocumentOrMail(professor.getDocument(), professor.getMail());
+            boolean exists = existing.stream().anyMatch(x-> !x.getId().equals(professor.getId()));
+            if(exists) throw new IllegalArgumentException("Ya existe un profesor con este mail o documento");
         } catch(InvalidInputException e){
             e.printStackTrace();
             throw new IllegalArgumentException(e.getMessage());
@@ -56,8 +55,6 @@ public class ProfessorServiceImpl implements ProfessorService{
 
     public Professor createNewProfessor(Professor professor) {
         validate(professor);
-        professorRepository.findProfessorByDocumentOrMail(professor.getDocument(), professor.getMail()).ifPresent(x ->
-        {throw new IllegalArgumentException("Ya existe un profesor con este mail o documento");});
         return professorRepository.save(professor);
     }
 
