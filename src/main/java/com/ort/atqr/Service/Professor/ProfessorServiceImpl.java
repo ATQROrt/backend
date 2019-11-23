@@ -29,6 +29,7 @@ public class ProfessorServiceImpl implements ProfessorService{
         Professor std = professorRepository.findById(professor.getId()).orElse(null);
         if (std != null) {
             AttributeHelper.myCopyProperties(professor, std);
+            validate(std);
             professorRepository.save(std);
             return Optional.of(std);
         } else {
@@ -40,16 +41,20 @@ public class ProfessorServiceImpl implements ProfessorService{
         return professorRepository.findById(id).orElse(null);
     }
 
-    public Professor createNewProfessor(Professor professor) {
-        try {
+    private void validate(Professor professor){
+        try{
             professor.validate();
-            professorRepository.findProfessorByDocumentOrMail(professor.getDocument(), professor.getMail()).ifPresent(x ->
-            {throw new IllegalArgumentException("Ya existe un profesor con este mail o documento");});
-            return professorRepository.save(professor);
-        } catch (InvalidInputException e) {
+        } catch(InvalidInputException e){
             e.printStackTrace();
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    public Professor createNewProfessor(Professor professor) {
+        validate(professor);
+        professorRepository.findProfessorByDocumentOrMail(professor.getDocument(), professor.getMail()).ifPresent(x ->
+        {throw new IllegalArgumentException("Ya existe un profesor con este mail o documento");});
+        return professorRepository.save(professor);
     }
 
     public void deleteProfessor(Long id) {
