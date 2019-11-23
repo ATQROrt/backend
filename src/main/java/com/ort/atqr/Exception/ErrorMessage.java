@@ -1,16 +1,16 @@
 package com.ort.atqr.Exception;
 
 public enum ErrorMessage {
-    INVALID_NAME("Name must be valid"),
-    INVALID_LAST_NAME("Last name can't be null or empty"),
-    INVALID_DOCUMENT("Document can't be null and must be a valid number"),
-    INVALID_BIRTHDATE("Birth date can't be null and must be a valid date"),
-    INVALID_MAIL("Mail can't be null"),
-    INVALID_PASSWORD("Password can't be null and must be between 8 an 16 characters"),
-    INVALID_CODE("Code must be valid"),
-    INVALID_INFO("Information is invalid"),
-    NOT_FOUND("We couldn't find what you were looking for"),
-    INVALID_ASSIGNATURE("Assignature can't be null");
+    INVALID_NAME("El nombre debe ser valido"),
+    INVALID_LAST_NAME("El apellido no puede ser nulo o vacio"),
+    INVALID_DOCUMENT("El documento no puede ser nulo y debe ser un numero valido"),
+    INVALID_BIRTHDATE("La fecha de nacimiento no puede ser nula y debe ser una fecha valida"),
+    INVALID_MAIL("El mail no puede ser nulo"),
+    INVALID_PASSWORD("La contrasena no debe ser nula y debe tener entre 8 y 16 caracteres"),
+    INVALID_CODE("El codigo debe ser valido"),
+    INVALID_INFO("La informacion es invalida"),
+    NOT_FOUND("No pudimos encontrar lo que estas buscando"),
+    INVALID_ASSIGNATURE("La materia no puede ser nula");
 
     private String message;
 

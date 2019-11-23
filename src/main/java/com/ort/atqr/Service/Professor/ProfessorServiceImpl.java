@@ -54,7 +54,7 @@ public class ProfessorServiceImpl implements ProfessorService{
 
     public void deleteProfessor(Long id) {
         Long count = professorRepository.getProfessorCourses(id);
-        if(count != null && count < 1)
+        if(count == null || count < 1)
             professorRepository.deleteById(id);
         else
             throw new IllegalArgumentException("El profesor es parte de diversos cursos");
