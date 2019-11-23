@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface ProfessorRepository extends CrudRepository<Professor, Long> {
     Professor findProfessorByDocumentAndPassword(Long document, String password);
 
-    Optional<Professor> findProfessorByDocumentOrMail(Long document, String mail);
+    List<Professor> findProfessorByDocumentOrMail(Long document, String mail);
 
     @Transactional
     @Query(value = "SELECT id FROM course WHERE professor_id = ?1 LIMIT 1", nativeQuery = true)

@@ -18,6 +18,19 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
     @Query(value = "DELETE FROM Student_Course_Intermediate WHERE STUDENT_ID = ?1", nativeQuery = true)
     void deleteStudentFromCourses(Long id);
 
-    Optional<Student> findStudentByDocumentOrMail(Long document, String mail);
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM Assistance WHERE STUDENT_ID = ?1", nativeQuery = true)
+    void deleteStudentFromAssistance(Long id);
+
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM class_day_assistance_list WHERE assistance_list_id = ?1", nativeQuery = true)
+    void deleteAssistance(Long id);
+
+    @Query(value = "SELECT id FROM ASSISTANCE WHERE STUDENT_ID = ?1", nativeQuery = true)
+    List<Long> findAssistanceId(Long id);
+
+    List<Student> findStudentByDocumentOrMail(Long document, String mail);
 }
 
