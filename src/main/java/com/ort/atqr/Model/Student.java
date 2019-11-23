@@ -15,4 +15,10 @@ public class Student extends User {
 
     public Student() {
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Student student = (Student) obj;
+        return this.getId().equals(student.getId());
+    }
 }

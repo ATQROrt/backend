@@ -52,6 +52,12 @@ public class CourseController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PostMapping(value = "/{id}/delete")
+    public ResponseEntity<Course> removeStudent(@PathVariable Long id, @RequestBody Student student){
+        courseService.removeStudent(id, student);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping(value = "/{id}/professor")
     public ResponseEntity<Course> assignProfessor(@PathVariable Long id, @RequestBody Professor professor){
         courseService.assignProfessor(id, professor);

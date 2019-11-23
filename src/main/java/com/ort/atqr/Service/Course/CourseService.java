@@ -61,6 +61,14 @@ public class CourseService {
         }
     }
 
+    public void removeStudent(Long id, Student student){
+        Course course = getById(id);
+        if(course!=null){
+            course.removeStudent(student);
+            courseRepository.save(course);
+        }
+    }
+
     public List<CoursePercentage> getStudentCoursesWithPercentage(Long studentId){
         List<CoursePercentage> courses = new ArrayList<>();
 

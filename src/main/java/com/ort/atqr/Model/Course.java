@@ -41,6 +41,10 @@ public class Course implements Validatable {
         this.students.add(student);
     }
 
+    public void removeStudent(Student student){
+        this.students.remove(student);
+    }
+
     public Asignature getAsignature() {
         return asignature;
     }
