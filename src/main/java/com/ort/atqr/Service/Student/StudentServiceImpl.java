@@ -62,6 +62,11 @@ public class StudentServiceImpl implements StudentService{
 
     public void deleteStudent(Long id) {
         studentRepository.deleteStudentFromCourses(id);
+        List<Long> assistanceIds = studentRepository.findAssistanceId(id);
+        for(Long aid : assistanceIds){
+            studentRepository.deleteAssistance(aid);
+        }
+        studentRepository.deleteStudentFromAssistance(id);
         studentRepository.deleteById(id);
     }
 
