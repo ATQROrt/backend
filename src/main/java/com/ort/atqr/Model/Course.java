@@ -28,9 +28,14 @@ public class Course implements Validatable {
 
     @Override
     public void validate() throws InvalidInputException {
+        if(this.professor == null){
+            throw new InvalidInputException(ErrorMessage.INVALID_PROFESSOR);
+        }
+        professor.validate();
         if (this.asignature == null) {
             throw new InvalidInputException(ErrorMessage.INVALID_ASSIGNATURE);
         }
+        asignature.validate();
     }
 
     public void addClass(ClassDay classDay){

@@ -10,7 +10,8 @@ public enum ErrorMessage {
     INVALID_CODE("El codigo debe ser valido"),
     INVALID_INFO("La informacion es invalida"),
     NOT_FOUND("No pudimos encontrar lo que estas buscando"),
-    INVALID_ASSIGNATURE("La materia no puede ser nula");
+    INVALID_ASSIGNATURE("La materia no puede ser nula"),
+    INVALID_PROFESSOR("El profesor no puede estar vacio");
 
     private String message;
 
