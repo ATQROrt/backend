@@ -31,6 +31,6 @@ public interface StudentRepository extends CrudRepository<Student, Long> {
     @Query(value = "SELECT id FROM ASSISTANCE WHERE STUDENT_ID = ?1", nativeQuery = true)
     List<Long> findAssistanceId(Long id);
 
-    Optional<Student> findStudentByDocumentOrMail(Long document, String mail);
+    List<Student> findStudentByDocumentOrMail(Long document, String mail);
 }
 

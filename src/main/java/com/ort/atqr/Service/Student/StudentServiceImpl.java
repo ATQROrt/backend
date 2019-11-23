@@ -31,6 +31,9 @@ public class StudentServiceImpl implements StudentService{
     private void validate(Student student){
         try{
             student.validate();
+            List<Student> existing = studentRepository.findStudentByDocumentOrMail(student.getDocument(), student.getMail());
+            boolean exists = existing.stream().anyMatch(x-> !x.getId().equals(student.getId()));
+            if(exists) throw new IllegalArgumentException("Ya existe un alumno con este mail o documento");
         } catch(InvalidInputException e){
             e.printStackTrace();
             throw new IllegalArgumentException(e.getMessage());
@@ -55,8 +58,6 @@ public class StudentServiceImpl implements StudentService{
 
     public Student createNewStudent(Student student) {
         validate(student);
-        studentRepository.findStudentByDocumentOrMail(student.getDocument(), student.getMail()).ifPresent(x ->
-        {throw new IllegalArgumentException("Ya existe un alumno con este mail o documento");});
         return studentRepository.save(student);
     }
 
