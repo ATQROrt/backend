@@ -1,24 +1,23 @@
 package com.ort.atqr.Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class DateAssistance {
-
-    private Date date;
+    private LocalDate date;
     private AssistanceStatus assistanceStatus;
     private Boolean cancelled;
 
-    public DateAssistance(Date date, AssistanceStatus assistanceStatus, Boolean cancelled) {
+    public DateAssistance(LocalDate date, AssistanceStatus assistanceStatus, Boolean cancelled) {
         this.date = date;
         this.assistanceStatus = assistanceStatus;
         this.cancelled = cancelled;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
