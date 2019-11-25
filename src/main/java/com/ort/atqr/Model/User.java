@@ -51,7 +51,7 @@ public abstract class User implements Validatable {
             throw new InvalidInputException(ErrorMessage.INVALID_DOCUMENT);
         }
 
-        if (this.birth == null || this.birth.isBefore(LocalDate.of(1990, 1, 1)) || this.birth.isAfter(LocalDate.now())) {
+        if (this.birth == null || this.birth.isBefore(LocalDate.of(1900, 1, 1)) || this.birth.isAfter(LocalDate.now())) {
             throw new InvalidInputException(ErrorMessage.INVALID_BIRTHDATE);
         }
 
