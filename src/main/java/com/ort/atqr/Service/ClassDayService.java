@@ -7,6 +7,7 @@ import com.ort.atqr.Service.Course.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -29,12 +30,10 @@ public class ClassDayService {
     private boolean isSameDate(Optional<ClassDay> lastClass, ClassDay classDay){
         if(!lastClass.isPresent()) return false;
 
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(lastClass.get().getDate());
-        cal2.setTime(classDay.getDate());
-        return cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) &&
-                cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR);
+        LocalDate lastDate = lastClass.get().getDate();
+        LocalDate newDate = classDay.getDate();
+
+        return lastDate.isEqual(newDate);
     }
 
     private Optional<ClassDay> getLastClass(Course course){

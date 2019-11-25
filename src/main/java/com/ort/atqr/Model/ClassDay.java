@@ -3,6 +3,7 @@ package com.ort.atqr.Model;
 import com.ort.atqr.Exception.InvalidInputException;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,12 +16,12 @@ public class ClassDay{
     private Long id;
     @OneToMany(targetEntity = Assistance.class, fetch = FetchType.LAZY)
     private List<Assistance> assistanceList;
-    private Date date;
+    private LocalDate date;
     private Boolean cancelled;
 
     public ClassDay(){
         this.assistanceList = new ArrayList<>();
-        this.date = new Date();
+        this.date = LocalDate.now();
         this.cancelled = false;
     }
 
@@ -44,11 +45,11 @@ public class ClassDay{
         this.assistanceList = assistanceList;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

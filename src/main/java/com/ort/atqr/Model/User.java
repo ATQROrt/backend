@@ -2,12 +2,9 @@ package com.ort.atqr.Model;
 
 import com.ort.atqr.Exception.ErrorMessage;
 import com.ort.atqr.Exception.InvalidInputException;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
 
 @MappedSuperclass
 public abstract class User implements Validatable {
@@ -19,14 +16,14 @@ public abstract class User implements Validatable {
     private String lastName;
     private Long document;
     private String mail;
-    private Date birth;
+    private LocalDate birth;
     private String imageUrl;
     private String password;
-    private Date createdAt;
+    private LocalDate createdAt;
     @Column(name = "IS_ADMIN", columnDefinition = "boolean default false", nullable = false)
     private Boolean isAdmin = false;
 
-    public User(String firstName, String lastName, Long document, String mail, Date birth, String imageUrl, String password, Boolean isAdmin) {
+    public User(String firstName, String lastName, Long document, String mail, LocalDate birth, String imageUrl, String password, Boolean isAdmin) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
@@ -54,7 +51,7 @@ public abstract class User implements Validatable {
             throw new InvalidInputException(ErrorMessage.INVALID_DOCUMENT);
         }
 
-        if (this.birth == null || this.birth.before(new Date(111900)) || this.birth.after(new Date())) {
+        if (this.birth == null || this.birth.isBefore(LocalDate.of(1990, 1, 1)) || this.birth.isAfter(LocalDate.now())) {
             throw new InvalidInputException(ErrorMessage.INVALID_BIRTHDATE);
         }
 
@@ -69,10 +66,10 @@ public abstract class User implements Validatable {
 
     @PrePersist
     private void createdAt() {
-        this.createdAt = new Date();
+        this.createdAt = LocalDate.now();
     }
 
-    public Date getCreatedAt() {
+    public LocalDate getCreatedAt() {
         return createdAt;
     }
 
@@ -108,11 +105,11 @@ public abstract class User implements Validatable {
         this.mail = mail;
     }
 
-    public Date getBirth() {
+    public LocalDate getBirth() {
         return birth;
     }
 
-    public void setBirth(Date birth) {
+    public void setBirth(LocalDate birth) {
         this.birth = birth;
     }
 
@@ -140,5 +137,7 @@ public abstract class User implements Validatable {
         this.id = id;
     }
 
-    public Boolean getIsAdmin(){ return isAdmin; }
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
 }
